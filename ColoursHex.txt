@@ -1,0 +1,9 @@
+Colour Scheme
+
+Primary Sky Blue 00C8DF
+  Fade: 00B4C9, 00A0B2, 008C9C
+
+Background Dark Blue 003664
+
+Highlight gold FFCD00
+  Darker: D49000
