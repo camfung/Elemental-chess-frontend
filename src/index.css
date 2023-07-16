@@ -11,3 +11,66 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.primary-txt {
+  color: #00C8DF;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.primary-bgd {
+  background-color: #00C8DF;
+}
+
+.fade1-txt {
+  color: #00B4C9;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.fade1-bgd {
+  background-color: #00B4C9;
+}
+
+.fade2-txt {
+  color: #00A0B2;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.fade2-bgd {
+  background-color: #00A0B2;
+}
+
+.fade3-txt {
+  color: #008C9C;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.fade3-bgd {
+  background-color: #008C9C;
+}
+
+.dark-txt {
+  color: #003664;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.dark-bgd {
+  background-color: #003664;
+}
+
+.gold-txt {
+  color: #FFCD00;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.gold-bgd {
+  background-color: #FFCD00;
+}
+
+.darkGold-txt {
+  color: #D49000;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.darkGold-bgd {
+  background-color: #D49000;
+}
