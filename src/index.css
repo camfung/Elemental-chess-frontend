@@ -74,3 +74,12 @@ code {
 .darkGold-bgd {
   background-color: #D49000;
 }
+
+.button {
+  transition: filter 0.3s, transform 0.3s;
+}
+
+.button:hover {
+  filter: brightness(110%);
+  transform: scale(1.1);
+}
