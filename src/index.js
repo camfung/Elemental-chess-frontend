@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Grid } from '@mui/material';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -7,9 +8,23 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <mainGrid />
   </React.StrictMode>
 );
+
+const mainGrid = () => {
+  return(
+    <Grid container spacing={2}>
+      {/* left nav bar */}
+      <Grid item xs={2}>
+        <div class="primary-bgd"></div>
+      </Grid>
+      <Grid item xs={8}>
+        <div class="fade1-bgd"></div>
+      </Grid>
+    </Grid>
+  )
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
