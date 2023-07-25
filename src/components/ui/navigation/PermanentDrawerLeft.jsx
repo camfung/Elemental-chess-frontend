@@ -26,6 +26,7 @@ export default function PermanentDrawerLeft(props) {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
+            backgroundColor: '#003664;'
           },
         }}
         variant="permanent"
@@ -48,7 +49,7 @@ export default function PermanentDrawerLeft(props) {
       </Drawer>
       <Box
         component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+        sx={{ flexGrow: 1, bgcolor: 'background.transparent', p: 3 }}
       >
         {props.children}
       </Box>
