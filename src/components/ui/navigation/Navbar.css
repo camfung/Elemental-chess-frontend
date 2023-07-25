@@ -1,0 +1,66 @@
+.nav-bar {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+}
+   
+/* Style for ImageButton components within the vertical nav bar */
+.image-button {
+    /* Add any specific styles for the buttons within the vertical nav bar here */
+    margin-bottom: 10px; /* Add some spacing between the buttons */
+}
+
+#right-button-group {
+    margin-left: -117px;
+}
+
+.smaller-button-group {
+    width: 100%;
+}
+
+.bottom-button, .top-button {
+    translate: -21%;
+}
+
+.big-buttons {
+    display: flex;
+    grid-area: 1 / 1 / 3 / 2;
+}
+
+.little-buttons {
+    width: 50%;
+}
+
+.little-buttons-top {
+    grid-area: 1 / 2 / 2 / 3;
+    background-color: black;
+}
+.little-buttons-bottom {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.parent {
+display: grid;
+grid-template-columns: 2fr 1fr;
+grid-template-rows: repeat(2, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+align-items: center;
+}
+
+.div1 { grid-area: 1 / 1 / 3 / 2;
+}
+.div2 { 
+    grid-area: 1 / 2 / 2 / 3; 
+}
+.div3 { 
+    grid-area: 2 / 2 / 3 / 3; 
+}
+
+.div2, .div3 {
+    display: flex;
+}
+
+.right-buttons {
+    translate: -15%;
+}
