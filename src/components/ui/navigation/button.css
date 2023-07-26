@@ -32,6 +32,6 @@
   }
   
   .image-button:hover .button-text {
-    opacity: 0.8;
+    text-shadow: 0 0 5px rgb(255, 255, 255);
   }
   
