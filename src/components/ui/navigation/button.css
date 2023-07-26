@@ -1,0 +1,37 @@
+.image-button {
+    position: relative;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: transform .3s ease;
+
+}
+
+.image-button img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+.button-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.image-button:hover {
+    transform: scale(1.1);
+  }
+  
+  .image-button:hover img {
+    filter: brightness(1.2);
+  }
+  
+  .image-button:hover .button-text {
+    text-shadow: 0 0 5px rgb(255, 255, 255);
+  }
+  
