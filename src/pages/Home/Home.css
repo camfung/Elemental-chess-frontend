@@ -1,0 +1,10 @@
+.hero {
+    width: 30%;
+}
+
+.img-container {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}

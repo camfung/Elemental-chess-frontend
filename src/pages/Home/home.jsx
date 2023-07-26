@@ -1,20 +1,21 @@
 import { React, useState } from 'react';
-import NavBar from "../../components/Navbar"
-import NavButton from '../../components/ui/RedirectButton';
+import NavBar from "../../components/ui/navigation/Navbar"
+import RedirectButton from '../../components/ui/navigation/RedirectButton';
+import PermanentDrawerLeft from '../../components/ui/navigation/PermanentDrawerLeft';
+import art from '../../assets/art.png';
+import "./Home.css"
 const Home = () => {
 
-    const [count, setCount] = useState(0);
-
-    const test = () => {
-        setCount(count + 1);
-    }
-
     return (
-        <div>
-            <h1>Welcome to My Website</h1>
-            <div> count is {count} </div>
-            <button onClick={test}>Tests</button>
-        </div>
+        <>
+            <PermanentDrawerLeft>
+                <div className="img-container">
+                    <img className='hero' src={art} alt="" />
+                </div>
+                <NavBar></NavBar>
+            </PermanentDrawerLeft>
+
+        </>
     );
 };
 
