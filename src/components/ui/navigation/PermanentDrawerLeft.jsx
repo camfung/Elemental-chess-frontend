@@ -26,7 +26,8 @@ export default function PermanentDrawerLeft(props) {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            backgroundColor: '#003664;'
+            backgroundColor: '#003664;',
+            color: 'white',
           },
         }}
         variant="permanent"

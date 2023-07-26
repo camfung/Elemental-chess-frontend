@@ -25,7 +25,7 @@ const NavBar = () => {
           </div>
         </div>
 
-        <div class="div2 right-buttons">
+        <div class="div2 right-buttons small">
           <div className="little-buttons">
             <RedirectButton label="Ranked Standard" />
             <RedirectButton label="Ranked Random" className='bottom-button' />
