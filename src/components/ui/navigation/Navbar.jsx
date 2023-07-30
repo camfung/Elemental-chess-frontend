@@ -1,7 +1,6 @@
 import React from 'react';
 import ButtonCluster from './ButtonCluster';
 import RedirectButton from './RedirectButton';
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import "./Navbar.css"
 const NavBar = () => {
   return (
