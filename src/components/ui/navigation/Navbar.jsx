@@ -18,8 +18,8 @@ const NavBar = () => {
             </div>
 
             <div className='button-group right-buttons'>
-              <RedirectButton label="Play" />
-              <RedirectButton label="Teams" flipped />
+              <RedirectButton pageName={"play"} label="Play" />
+              <RedirectButton pageName={"teamBuilder"} label="Teams" flipped />
             </div>
 
           </div>

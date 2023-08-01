@@ -1,0 +1,10 @@
+/* .selectingType {
+    filter: brightness(110%);
+    box-shadow: 0px 0px 26px 24px rgba(0,52,255,0.68);
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;   
+} */
+
+.typeLabelCover {
+    translate: 0 -250%;
+}
