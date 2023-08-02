@@ -4,11 +4,21 @@ import ReactDOM from "react-dom/client";
 import Home from "./pages/Home/home.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
+import TeamBuilder from "./pages/TeamBuilder/TeamBuilder.jsx";
+import Play from "./pages/Play/Play.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/TeamBuilder",
+    element: <TeamBuilder />,
+  },
+  {
+    path: "/Play",
+    element: <Play />,
   },
 ]);
 

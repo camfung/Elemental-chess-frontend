@@ -1,0 +1,39 @@
+.timer-wrapper:not(.clock-player-turn) {
+    opacity: .5;
+}
+
+.timer-wrapper {
+    background-color: #262421;
+}
+
+.timer-wrapper {
+    align-items: center;
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-md);
+    font-size: 2.4rem;
+    height: var(--xxl-spacing);
+    justify-content: center;
+    padding: 0 var(--spacing-md);
+}
+
+.clock-left {
+    transform: rotate(360deg)
+}
+
+.clock-up {
+    transform: rotate(90deg)
+}
+
+.clock-right {
+    transform: rotate(180deg)
+}
+.clock-down {
+    transform: rotate(270deg)
+}
+
+.clock-icon {
+    /* transition: transform 1s linear; */
+    fill: var(--primary-light);
+}

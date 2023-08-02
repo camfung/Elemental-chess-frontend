@@ -1,0 +1,26 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    
+     /* Adjust the gap between squares if needed */
+  }
+  
+  .square {
+    width: 100%; /* Each square will take up the same width */
+    border: 2px solid black;
+  }
+  
+  /* Define colors for the alternating squares */
+  .default-color {
+    background-color: rgb(202, 0, 0); /* Set the default color */
+  }
+  
+  .alternate-color {
+    background-color: rgb(219, 219, 219); /* Set the alternate color */
+  }
+
+  /* Remove top border for the first row of squares */
+  .square:nth-child(n + 9) {
+    border-top: none;
+  }

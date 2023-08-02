@@ -1,0 +1,15 @@
+.player-header  {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-md);
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.name-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-sm);
+}

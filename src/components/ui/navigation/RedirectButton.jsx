@@ -13,12 +13,14 @@ const RedirectButton = ({ pageName, label, flipped = false, className = '' }) =>
   };
 
   return (
+    <div className='highlight'>
     <button className={`image-button ${className}`} onClick={handleButtonClick}>
       {flipped && <img src={flippedImageSrc} alt="Button Image" />}
       {!flipped && <img src={imageSrc} alt="Button Image" />}
 
       <span className="button-text">{label}</span>
     </button>
+    </div>
   );
 };
 
