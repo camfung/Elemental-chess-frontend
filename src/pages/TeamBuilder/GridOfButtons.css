@@ -1,0 +1,17 @@
+.typeButton {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .type-text {
+    font-size: 1.5vw
+  }
+
+  .piece-text {
+    font-size: 1.3vw;
+  }
+
+  .back-fade {
+    background-color: rgba(0, 0, 0, 0.7); /* Red background with 50% transparency */
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.7);
+  }

@@ -11,12 +11,23 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Logo from '../../../assets/logo-color-cropped.png'
+import Logo from '../../../assets/logo-color-cropped.png';
+import { useNavigate } from 'react-router-dom';
 
+// Import the CSS class for the link cursor
+import './PermanentDrawer.css';
 
 const drawerWidth = 240;
 
 export default function PermanentDrawerLeft(props) {
+  const navigate = useNavigate();
+
+  // Function to handle page navigation
+  const handlePageNavigation = (pageName) => {
+    console.log(`Navigating to ${pageName}`)
+    navigate(`/${pageName}`);
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <Drawer
@@ -33,25 +44,26 @@ export default function PermanentDrawerLeft(props) {
         variant="permanent"
         anchor="left"
       >
-        <img src={Logo} alt="Logo" />
+        <img src={Logo} className='link-cursor' alt="Logo" />
         <Divider />
         <List>
-          {['Community', 'How To Play', 'Type Chart', 'Bug Reporting', "Sign Out"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-
-                </ListItemIcon>
-                <ListItemText primary={text} />
+          {[
+            { pageName: 'community', label: 'Community' },
+            { pageName: 'how-to-play', label: 'How To Play' },
+            { pageName: 'type-chart', label: 'Type Chart' },
+            { pageName: 'bug-reporting', label: 'Bug Reporting' },
+            { pageName: 'sign-out', label: 'Sign Out' },
+          ].map((item, index) => (
+            <ListItem key={item.label} disablePadding>
+              {/* Use ListItemButton with an onClick handler and apply the link-cursor class */}
+              <ListItemButton className="link-cursor" onClick={() => handlePageNavigation(item.pageName)}>
+                <ListItemText primary={item.label} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Drawer>
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.transparent', p: 3 }}
-      >
+      <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.transparent', p: 3, height: '90vh' }}>
         {props.children}
       </Box>
     </Box>

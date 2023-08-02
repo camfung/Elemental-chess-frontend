@@ -8,8 +8,7 @@
 .image-button {
     /* Add any specific styles for the buttons within the vertical nav bar here */
     margin-bottom: 10px; /* Add some spacing between the buttons */
-    font-size: 3vw;
-    color: aqua;
+    font-size: 4vw;
 }
 
 #right-button-group {
@@ -67,6 +66,6 @@ align-items: center;
     translate: -15%;
 }
 
-.little-buttons .button-text {
-    font-size: 50%;
+.little-buttons .image-button {
+    font-size: 1.5vw;
 }

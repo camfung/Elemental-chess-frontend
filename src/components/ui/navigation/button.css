@@ -13,6 +13,7 @@
     display: block;
   }
 
+  
 .button-text {
     position: absolute;
     top: 50%;
@@ -27,11 +28,19 @@
     transform: scale(1.1);
   }
   
-  .image-button:hover img {
-    filter: brightness(1.2);
-  }
   
   .image-button:hover .button-text {
     text-shadow: 0 0 5px rgb(255, 255, 255);
   }
+  
+  .image-button-coloured img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .image-button .big-button {
+    font-size: 6vw;
+  }
+
   
