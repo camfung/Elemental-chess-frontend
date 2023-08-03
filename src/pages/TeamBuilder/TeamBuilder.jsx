@@ -35,6 +35,7 @@ const TeamBuilder = () => {
     const [selectedColor, setSelectedColor] = useState('white');
     const [pieceElementalTypes, setPieceElementalTypes] = useState([["None", "None", "None", "None", "None", "None", "None", "None"], ["None", "None", "None", "None", "None", "None", "None", "None"]]);
     const [inGame, setInGame] = useState(false);
+    const [selectedPiece, setSelectedPiece] = useState(null);
 
     const resetTeamBuilderGrid = useCallback(() => {
 
@@ -76,30 +77,30 @@ const TeamBuilder = () => {
     }, [setPieceElementalTypes]);
 
     const handleGridOfButtonsClick = useCallback((e) => {
-        setSelectedType(e.target.innerHTML);
-    }, [selectedType]);
-
-    const handleTeamBuilderGridClick = (row, col) => {
-        if (selectedType !== '') {
-            let newPieceElementalTypes = pieceElementalTypes;
-            for (let ele of newPieceElementalTypes) {
-                if (ele.includes(selectedType)) {
-                    alert("You can only have one of each type on your team")
-                    setSelectedType("")
-                    return;
-                }
-            }
-            newPieceElementalTypes[row][col] = selectedType;
-            setPieceElementalTypes(newPieceElementalTypes);
-            setTeamBuilderGridClicked(true);
-            setSelectedType("")
-        } else {
-            alert("Please select a type first")
+        console.log(e.target.innerHTML);
+        const selectedType = e.target.innerHTML;
+        console.log(selectedPiece);
+        if (!selectedPiece) {
+            alert("Please select a piece");
+            return;
         }
-    }
-    const test = useCallback(() => {
-        console.log(JSON.stringify(pieceElementalTypes))
-    })
+        if (pieceElementalTypes.some(ele => ele.includes(selectedType))) {
+            alert("You can only have one of each type on your team");
+            setSelectedType(null);
+            return;
+        }
+        setPieceElementalTypes(prevState => {
+            const newPieceElementalTypes = [...prevState];
+            newPieceElementalTypes[selectedPiece.row][selectedPiece.col] = selectedType;
+            return newPieceElementalTypes;
+        });
+        setSelectedPiece(null);
+    }, [selectedPiece]);
+    // setSelectedType(e.target.innerHTML);
+    const handleTeamBuilderGridClick = useCallback((row, col) => {
+        setSelectedPiece({ row: row, col: col });
+    }, [setSelectedPiece, selectedPiece]);
+
     return (
         <>
             <PermanentDrawerLeft>
