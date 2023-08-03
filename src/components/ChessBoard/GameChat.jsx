@@ -26,7 +26,7 @@ const GameChat = () => {
                     </div>
                 ))}
             </Box>
-            <Box sx={styles} display="flex" alignItems="center">
+            <Box display="flex" alignItems="center">
                 <TextField
                     label="Type your message"
                     variant="outlined"

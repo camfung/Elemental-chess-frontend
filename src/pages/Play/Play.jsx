@@ -12,7 +12,7 @@ const Play = () => {
     return (
         <>
             <PermanentDrawerLeft>
-                <div style={{ display: "flex", flexDirection: "row", gap: "4%" }} className="play">
+                <div style={{ display: "flex", flexDirection: "row" }} className="play">
                     <BoardView></BoardView>
 
                     <TabPanel></TabPanel>`

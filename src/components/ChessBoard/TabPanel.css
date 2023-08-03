@@ -1,9 +1,8 @@
 .tab-pannel-wrapper{
     width: 50%;
-    margin: var(--spacing-lg);
-    padding: var(--spacing-md);
     border-radius: 0.5rem;
     box-shadow: 0 0.1rem 0.1rem 0 rgba(0,0,0,.2);
+    margin-left: 2%;
 }
 
 .tabs-wrapper {
