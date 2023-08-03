@@ -45,6 +45,11 @@ const TeamBuilder = () => {
 
     const handlSwitchChange = (event) => {
         setSelectedColor(event.target.checked ? 'white' : 'black')
+        const newPieceElementalTypes = [...pieceElementalTypes];
+        for (let row of newPieceElementalTypes) {
+            row.reverse();
+        }
+        setPieceElementalTypes(newPieceElementalTypes);
     }
 
     const handleSave = useCallback(() => {
