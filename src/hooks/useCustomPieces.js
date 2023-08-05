@@ -58,7 +58,7 @@ const customPieces = (types) => {
         style={{
           backgroundImage: `url(${p})`,
           backgroundSize: "100%",
-          width: "100%",
+          width: "70px",
         }}
       >
         {chessPieceMap[p]}

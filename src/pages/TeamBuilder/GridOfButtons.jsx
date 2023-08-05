@@ -3,7 +3,7 @@ import typeButton from '../../assets/typeButton.png';
 import { Button, Grid } from '@mui/material';
 import { PokemonTypes } from '../../utils/Enums'; // Update the import statement
 import './GridOfButtons.css';
-
+import TypeToolTip from '../../components/TypeToolTip';
 const GridOfButtons = (props) => {
 
   const {
@@ -15,10 +15,12 @@ const GridOfButtons = (props) => {
       {Object.values(PokemonTypes).map((type, index) => ( // Using Object.values to get the enum values
         <Grid item xs={6} sm={4} md={2} key={type}>
           <div className='highlight'>
-            <button onClick={(e) => { handleGridOfButtonsClick(e) }} id={index} className='image-button'>
-              <img className={`typeButton ${type}`} src={typeButton} alt={type} />
-              <span className="button-text type-text">{type}</span>
-            </button>
+            <TypeToolTip displayedType={type.toLowerCase()}>
+              <button onClick={(e) => { handleGridOfButtonsClick(e) }} id={index} className='image-button'>
+                <img className={`typeButton ${type}`} src={typeButton} alt={type} />
+                <span className="button-text type-text">{type}</span>
+              </button>
+            </TypeToolTip>
           </div>
         </Grid>
       ))}
