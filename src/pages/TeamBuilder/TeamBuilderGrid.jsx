@@ -25,7 +25,7 @@ const TeamBuilderGrid = ({ pieceColor, pieceElementalTypes, handleTeamBuilderGri
     }
 
     if (type) {
-      return <ChessPiece className= {selectedType !== "" ? "selectingType" : ''} onClick={() => handleTeamBuilderGridClick(row, col)} color={pieceColor} elementalType={pieceElementalTypes[row][col]} type={type} />;
+      return <ChessPiece className={selectedType !== "" ? "selectingType" : ''} onClick={() => handleTeamBuilderGridClick(row, col)} color={pieceColor} elementalType={pieceElementalTypes[row][col]} type={type} />;
     }
 
     return null;

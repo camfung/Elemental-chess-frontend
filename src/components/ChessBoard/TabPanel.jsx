@@ -8,6 +8,7 @@ import "./TabPanel.css"
 import GameHistory from './GameHistory';
 import GameControlPanel from './GameControlPanel';
 import GameChat from './GameChat';
+import TypeGrid from '../TypeGrid';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -58,10 +59,14 @@ export default function BasicTabs() {
     <div class="tab-pannel-wrapper transparentBlack-bgd primary-txt">
       <div class="tabs-wrapper ">
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tab label="Types" {...a11yProps(0)} />
           <Tab label="Play" {...a11yProps(0)} />
         </Tabs>
       </div>
       <TabPanel value={value} index={0}>
+        <TypeGrid></TypeGrid>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
         <GameHistory history={historyData}></GameHistory>
         <GameControlPanel></GameControlPanel>
         <GameChat></GameChat>
