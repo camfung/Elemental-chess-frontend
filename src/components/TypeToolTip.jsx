@@ -149,7 +149,7 @@ const TypeToolTip = ({ displayedType, children }) => {
                 <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                     <Paper elevation={3} style={{ padding: "16px" }}>
                         <div>
-                            <h3 style={{ marginBottom: "8px" }}>Super</h3>
+                            <h3 style={{ marginBottom: "8px" }}>Super Effective</h3>
                             <div>
                                 {pokemonTypes[displayedType]?.super.map((type, i) => (
                                     <span class={capitalizeFirstLetter(type)} key={i} style={typeLabelStyles}>
@@ -161,7 +161,7 @@ const TypeToolTip = ({ displayedType, children }) => {
                     </Paper>
                     <Paper elevation={3} style={{ padding: "16px" }}>
                         <div>
-                            <h3 style={{ marginBottom: "8px" }}>None</h3>
+                            <h3 style={{ marginBottom: "8px" }}>No Effect</h3>
                             <div>
                                 {pokemonTypes[displayedType]?.none.map((type, i) => (
                                     <span class={capitalizeFirstLetter(type)} key={i} style={typeLabelStyles}>
@@ -173,7 +173,7 @@ const TypeToolTip = ({ displayedType, children }) => {
                     </Paper>
                     <Paper elevation={3} style={{ padding: "16px" }}>
                         <div>
-                            <h3 style={{ marginBottom: "8px" }}>Not</h3>
+                            <h3 style={{ marginBottom: "8px" }}>Not Very Effective</h3>
                             <div>
                                 {pokemonTypes[displayedType]?.not.map((type, i) => (
                                     <span class={capitalizeFirstLetter(type)} key={i} style={typeLabelStyles}>
