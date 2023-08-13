@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Chess } from 'chess.js';
-import { Chessboard } from 'react-chessboard';
+// import { Chessboard } from 'react-chessboard';
+import * as chessboardModule from '../../dist/index.js';
 import { customPieces } from '../../hooks/useCustomPieces';
+const { Chessboard } = chessboardModule;
 
 const ChessboardWrapper = (props) => {
     const {

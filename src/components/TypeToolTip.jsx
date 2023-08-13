@@ -144,6 +144,7 @@ const TypeToolTip = ({ displayedType, children }) => {
 
     return (
         <Tooltip
+            disableInteractive
             arrow
             title={
                 <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
