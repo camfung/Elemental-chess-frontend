@@ -24,6 +24,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+import { ThirtyFpsSelect } from '@mui/icons-material'
 import * as ele from './elements.mjs'
 export const WHITE = 'w'
 export const BLACK = 'b'
@@ -435,6 +436,11 @@ export class Chess {
   constructor(whiteElements, blackElements) {
     this.load(DEFAULT_POSITION)
     this.loadElements(whiteElements, blackElements)
+  }
+
+  getInfo(square){
+    console.log(this._board[Ox88[square]])
+    return this._board[Ox88[square]]
   }
 
   loadElements(white, black) {
@@ -1097,7 +1103,8 @@ export class Chess {
     return moves
   }
   move(move, { strict = false } = {}) {
-    let newBoard = this._board
+    const us = this._turn
+    const them = swapColor(us)
     /*
      * The move function can be called with in the following parameters:
      *
@@ -1138,14 +1145,28 @@ export class Chess {
         throw new Error(`Invalid move: ${JSON.stringify(move)}`)
       }
     }
-    newBoard = this._board
 
-    console.log(this.getElementAt(move.from))
-    console.log(this.getElementAt(move.to))
-    moveObj.captureType = ele.captureType(
-      this.getElementAt(move.from),
-      this.getElementAt(move.to)
-    )
+    let capType = ele.captureType(this.getElementAt(move.from), this.getElementAt(move.to))
+    console.log('piece moved is ' + this.getElementAt(move.from))
+    if(capType != 'noCap'){
+        console.log('piece captured was ' + this.getElementAt(move.to))
+        console.log('the capture was ' + capType)} 
+    else console.log('No piece captured')
+    let nextMove = 'regular';
+    if(capType == 'superEffective'){
+        nextMove = move.to
+        this._makeMove(moveObj)
+    } else if(capType == 'immune'){
+        this._turn = them
+    } else if(capType == 'resisted'){
+        this._makeMove(moveObj)
+        delete this._board[Ox88[move.to]]
+        this._turn = them
+    } else {
+        this._makeMove(moveObj)
+        this._turn = them
+    }
+    
     // console.log(moveObj.captureType)
 
     // /*
@@ -1154,10 +1175,10 @@ export class Chess {
     //  */
 
     // const prettyMove = this._makePretty(moveObj)
-    this._makeMove(moveObj)
+    //this._makeMove(moveObj)
     // this._positionCounts[prettyMove.after]++
     // newBoard = this._board
-    // return prettyMove
+    return nextMove
   }
   _push(move) {
     this._history.push({
@@ -1251,7 +1272,7 @@ export class Chess {
     if (us === BLACK) {
       this._moveNumber++
     }
-    this._turn = them
+    //this._turn = them
   }
   undo() {
     const move = this._undoMove()

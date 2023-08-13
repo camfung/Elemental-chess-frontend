@@ -13,9 +13,10 @@ let whiteElements = [
 
 
 let blackElements = [
-  ['Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting'],
-  ['Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting']
+  ['Rock', 'Rock', 'Rock', 'Rock', 'Rock', 'Rock', 'Rock', 'Rock'],
+  ['Rock', 'Rock', 'Rock', 'Ghost', 'Rock', 'Rock', 'Rock', 'Rock']
 ];
+
 
 
 const chess = new Chess.Chess(whiteElements, blackElements);
@@ -31,20 +32,56 @@ async function inp() {
   });
 }
 
+async function SEinp() {
+  return new Promise((resolve) => {
+    rl.question('to: ', (to) => {
+      resolve({ to });
+    });
+  });
+}
+
 async function main() {
+  let capType = 'regular'
   while (!chess.isGameOver()) {
-    const { from, to } = await inp();
-    try {
-      chess.move({ from, to });
-    } catch (error) {
-      console.log(`${from} to ${to} failed`);
-      console.log(error)
+    if (capType !== 'regular'){
+      capType = await SEturn(capType)
+    } else {
+      capType = await turn()
     }
     console.log(chess.ascii());
-    //chess.stateType('e4')
   }
 
   rl.close();
+}
+
+async function turn(){
+  const { from, to } = await inp();
+  let capType
+    try {
+      capType = chess.move({ from, to });
+    } catch (error) {
+      console.log(`${from} to ${to} failed`);
+      console.log(error)
+      return 'regular'
+    }
+    return capType
+}
+
+async function SEturn(from) {
+  const { to } = await SEinp();
+  let capType;
+  try {
+    capType = chess.move({ from, to });
+  } catch (error) {
+    console.log(`${from} to ${to} failed`);
+    console.log(error);
+    capType = from
+  }
+  return capType;
+}
+
+function skip(){
+  chess._turn = chess.swapColor(chess._turn)
 }
 
 main();
