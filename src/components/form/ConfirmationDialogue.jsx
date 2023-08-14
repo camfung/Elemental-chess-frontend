@@ -6,13 +6,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-function ConfirmationDialog({ open, onClose, onDelete }) {
+function ConfirmationDialog({ open, onClose, onConfirm, message }) {
     const handleClose = () => {
         onClose();
     };
 
     const handleDelete = () => {
-        onDelete();
+        onConfirm();
         handleClose();
     };
 
@@ -21,14 +21,14 @@ function ConfirmationDialog({ open, onClose, onDelete }) {
             <DialogTitle>Confirm Deletion</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Are you sure you want to delete your team? This action cannot be undone.
+                    {message}
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} color="primary">
                     Cancel
                 </Button>
-                <Button onClick={handleDelete} color="primary">
+                <Button variant="contained" onClick={handleDelete} color="primary">
                     Delete
                 </Button>
             </DialogActions>

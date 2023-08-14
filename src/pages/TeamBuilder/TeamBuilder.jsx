@@ -9,6 +9,7 @@ import Switch from '@mui/material/Switch';
 import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import SnackBarWrapper from '../../components/ui/navigation/util/SnackBarWrapper';
+import ConfirmationDialog from '../../components/form/ConfirmationDialogue';
 import { PokemonTypes } from '../../utils/Enums';
 import "./TeamBuilder.css"
 const styles = {
@@ -35,6 +36,7 @@ const TeamBuilder = () => {
     const [selectedColor, setSelectedColor] = useState('white');
     const [pieceElementalTypes, setPieceElementalTypes] = useState([["None", "None", "None", "None", "None", "None", "None", "None"], ["None", "None", "None", "None", "None", "None", "None", "None"]]);
     const [inGame, setInGame] = useState(false);
+    const [deleteOpen, setDeleteOpen] = useState(false);
     const [selectedPiece, setSelectedPiece] = useState(null);
 
     const resetTeamBuilderGrid = useCallback(() => {
@@ -50,6 +52,19 @@ const TeamBuilder = () => {
             row.reverse();
         }
         setPieceElementalTypes(newPieceElementalTypes);
+    }
+
+    const handleDelete = () => {
+        setDeleteOpen(true);
+        alert("Deleted")
+    }
+
+    const deleteTeam = (name) => {
+        alert(name + " deleted")
+    }
+
+    const handleCancel = () => {
+        setDeleteOpen(false);
     }
 
     const handleSave = useCallback(() => {
@@ -128,6 +143,15 @@ const TeamBuilder = () => {
     return (
         <>
             <PermanentDrawerLeft>
+                <ConfirmationDialog
+                    open={deleteOpen}
+                    message={"Are you sure you want to delete your team? This action cannot be undone."}
+                    handleClose={handleCancel}
+                    onConfirm={() => { deleteTeam("Team Name"); handleCancel(); }}
+                >
+
+                </ConfirmationDialog>
+
                 <Grid container spacing={1} sx={{ maxWidth: '100%', margin: '0 auto', height: '90vh', justifyContent: 'space-between' }}>
                     {/* First column taking two-thirds of the width */}
                     <Grid item xs={9} sx={{ display: "grid", marginTop: '20px', marginBottom: '20px', padding: '10px', alignItems: 'center' }}>

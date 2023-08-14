@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
 import { CustomPagination } from './CustomPagination';
+import ConfirmationDialog from '../form/ConfirmationDialogue';
 import './TeamDataGrid.css'
 
 const styles = {
@@ -14,7 +15,7 @@ const styles = {
     height: '100%',
 }
 
-const TeamDataGrid = () => {
+const TeamDataGrid = ({ handleEdit, handleDelete }) => {
     // Sample data (replace this with your actual data)
     const rows = [
         { id: 1, teamName: 'Team A', creator: 'John Doe' },
@@ -34,16 +35,6 @@ const TeamDataGrid = () => {
             sortable: false,
             headerClassName: "primary-bgd",
             renderCell: (params) => {
-                const handleEdit = () => {
-                    // Implement your edit logic here
-                    console.log('Edit clicked for row:', params.id);
-                };
-
-                const handleDelete = () => {
-                    // Implement your delete logic here
-                    console.log('Delete clicked for row:', params.id);
-                };
-
                 return (
                     <>
                         <IconButton
