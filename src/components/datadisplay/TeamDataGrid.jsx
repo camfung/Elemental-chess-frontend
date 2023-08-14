@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
+import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
 import { CustomPagination } from './CustomPagination';
 import './TeamDataGrid.css'
 
@@ -50,7 +51,7 @@ const TeamDataGrid = () => {
                             size="small"
                             onClick={handleEdit}
                         >
-                            <EditIcon />
+                            <OpenInNewRoundedIcon />
                         </IconButton>
 
                         <IconButton

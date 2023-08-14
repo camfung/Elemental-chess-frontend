@@ -65,6 +65,25 @@ const TeamBuilder = () => {
         return false;
     }, [pieceElementalTypes]);
 
+    const handleRandomizeRest = useCallback(() => {
+        setPieceElementalTypes(prevState => {
+            const newPieceElementalTypes = [...prevState];
+            for (let row = 0; row < 2; row++) {
+                for (let col = 0; col < 8; col++) {
+                    if (newPieceElementalTypes[row][col] !== "None") {
+                        continue;
+                    }
+                    let randomType = Math.floor(Math.random() * 18);
+                    while (isTypeInArray(Object.keys(PokemonTypes)[randomType], newPieceElementalTypes)) {
+                        randomType = Math.floor(Math.random() * 18);
+                    }
+                    newPieceElementalTypes[row][col] = Object.keys(PokemonTypes)[randomType];
+                }
+            }
+            return newPieceElementalTypes;
+        });
+    })
+
     const handleRandomTeam = useCallback(() => {
         setPieceElementalTypes(prevState => {
             const newPieceElementalTypes = [...prevState];
@@ -132,6 +151,7 @@ const TeamBuilder = () => {
                                 <Button onClick={resetTeamBuilderGrid} variant='contained'>Reset</Button>
                                 <Button onClick={handleSave} variant='contained'>Save</Button>
                                 <Button onClick={handleRandomTeam} variant='contained'>Random</Button>
+                                <Button onClick={handleRandomizeRest} variant='contained'> Randomize Rest</Button>
                             </div>
 
                         </GridOfButtons>

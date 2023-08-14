@@ -15,7 +15,7 @@ const GridOfButtons = (props) => {
       {Object.values(PokemonTypes).map((type, index) => ( // Using Object.values to get the enum values
         <Grid item xs={6} sm={4} md={2} key={type}>
           <div className='highlight'>
-            <TypeToolTip displayedType={type.toLowerCase()}>
+            <TypeToolTip displayedType={type.toLowerCase()} delay={400}>
               <button onClick={(e) => { handleGridOfButtonsClick(e) }} id={index} className='image-button'>
                 <img className={`typeButton ${type}`} src={typeButton} alt={type} />
                 <span className="button-text type-text">{type}</span>
