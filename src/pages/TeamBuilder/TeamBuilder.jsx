@@ -32,7 +32,7 @@ const TeamBuilder = () => {
 
     const [selectedType, setSelectedType] = useState('');
     const [teamBuilderGridClicked, setTeamBuilderGridClicked] = useState(false);
-    const [selectedColor, setSelectedColor] = useState('white');
+    const [selectedColor, setSelectedColor] = useState('w');
     const [pieceElementalTypes, setPieceElementalTypes] = useState([["None", "None", "None", "None", "None", "None", "None", "None"], ["None", "None", "None", "None", "None", "None", "None", "None"]]);
     const [inGame, setInGame] = useState(false);
     const [selectedPiece, setSelectedPiece] = useState(null);
@@ -44,7 +44,7 @@ const TeamBuilder = () => {
     }, [setPieceElementalTypes, pieceElementalTypes]);
 
     const handlSwitchChange = (event) => {
-        setSelectedColor(event.target.checked ? 'white' : 'black')
+        setSelectedColor(event.target.checked ? 'w' : 'b')
         const newPieceElementalTypes = [...pieceElementalTypes];
         for (let row of newPieceElementalTypes) {
             row.reverse();
@@ -53,7 +53,7 @@ const TeamBuilder = () => {
     }
 
     const handleSave = useCallback(() => {
-        alert("Saved")
+        console.log(JSON.stringify(pieceElementalTypes));
     }, [pieceElementalTypes]);
 
     const isTypeInArray = useCallback((type, array) => {
@@ -128,7 +128,7 @@ const TeamBuilder = () => {
                         >
 
                             <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                                {!inGame && <FormControlLabel sx={{ color: "white" }} control={<Switch defaultChecked onChange={handlSwitchChange} />} label={selectedColor} />}
+                                {!inGame && <FormControlLabel sx={{ color: "white" }} control={<Switch defaultChecked onChange={handlSwitchChange} />} label={selectedColor == "q" ? "White" : "Black"} />}
                                 <Button onClick={resetTeamBuilderGrid} variant='contained'>Reset</Button>
                                 <Button onClick={handleSave} variant='contained'>Save</Button>
                                 <Button onClick={handleRandomTeam} variant='contained'>Random</Button>

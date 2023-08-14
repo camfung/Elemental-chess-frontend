@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import './TeamBuilderGrid.css'; // Create a CSS file (Grid.css) to style the grid
 import ChessPiece from '../../utils/ChessPiece'
+import { ChessPieceTypes, colors } from '../../utils/Enums';
 
 const TeamBuilderGrid = ({ pieceColor, pieceElementalTypes, handleTeamBuilderGridClick, selectedType }) => {
   const gridSize = { rows: 2, columns: 8 };
@@ -9,18 +10,18 @@ const TeamBuilderGrid = ({ pieceColor, pieceElementalTypes, handleTeamBuilderGri
     let type = null;
 
     if (row === 0) {
-      type = "Pawn";
+      type = ChessPieceTypes.PAWN;
     } else if (row === 1) {
       if (col === 0 || col === 7) {
-        type = "Rook";
+        type = ChessPieceTypes.ROOK;
       } else if (col === 1 || col === 6) {
-        type = "Knight";
+        type = ChessPieceTypes.KNIGHT;
       } else if (col === 2 || col === 5) {
-        type = "Bishop";
-      } else if ((pieceColor === "black" && col === 3) || (pieceColor === "white" && col === 4)) {
-        type = "King";
-      } else if ((pieceColor === "black" && col === 4) || (pieceColor === "white" && col === 3)) {
-        type = "Queen";
+        type = ChessPieceTypes.BISHOP;
+      } else if ((pieceColor === colors.BLACK && col === 3) || (pieceColor === colors.WHITE && col === 4)) {
+        type = ChessPieceTypes.KING;
+      } else if ((pieceColor === colors.BLACK && col === 4) || (pieceColor === colors.WHITE && col === 3)) {
+        type = ChessPieceTypes.QUEEN;
       }
     }
 
