@@ -33,6 +33,7 @@ async function inp() {
 
 async function main() {
   while (!chess.isGameOver()) {
+    console.log('SEflag ' + chess._SEflag)
     const { from, to } = await inp();
     try {
       chess.move({ from, to });

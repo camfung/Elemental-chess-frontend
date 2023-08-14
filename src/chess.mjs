@@ -435,9 +435,15 @@ export class Chess {
   _comments = {};
   _castling = { w: 0, b: 0 };
   _positionCounts = {};
+  _SEflag = null;
   constructor(whiteElements, blackElements) {
     this.load(DEFAULT_POSITION);
     this.loadElements(whiteElements, blackElements);
+  }
+
+  skipTurn(){
+    this._SEflag = null
+    this._turn = swapColor(this._turn)
   }
 
   loadElements(white, black) {
@@ -1100,6 +1106,7 @@ export class Chess {
     return moves;
   }
   move(move, { strict = false } = {}) {
+    
     let newBoard = this._board;
     /*
      * The move function can be called with in the following parameters:
@@ -1148,6 +1155,9 @@ export class Chess {
     //  * need to make a copy of move because we can't generate SAN after the move
     //  * is made
     //  */
+    if (this._SEflag && this._SEflag != move.from){
+      throw new Error('not the same piece, should have come from ' + this._SEflag)
+    }
     const us = this._turn
     const them = swapColor(us)
     let capType = ele.captureType(this.getElementAt(move.from), this.getElementAt(move.to))
@@ -1156,19 +1166,24 @@ export class Chess {
         console.log('piece captured was ' + this.getElementAt(move.to))
         console.log('the capture was ' + capType)} 
     else console.log('No piece captured')
-    let nextMove = 'regular';
+    // let nextMove = 'regular';
     if(capType == 'superEffective'){
-        nextMove = move.to
+        //nextMove = move.to
         this._makeMove(moveObj)
+        this._SEflag = move.to
+        this._turn = swapColor(this._turn)
     } else if(capType == 'immune'){
         this._turn = them
+        this._SEflag = null
     } else if(capType == 'resisted'){
         this._makeMove(moveObj)
         delete this._board[Ox88[move.to]]
         this._turn = them
+        this._SEflag = null
     } else {
         this._makeMove(moveObj)
         this._turn = them
+        this._SEflag = null
     }
 
     // const prettyMove = this._makePretty(moveObj)
