@@ -76,6 +76,7 @@ const BoardView = () => {
             {(childWidth && parentRef && <ChessboardWrapper
                 className="ChessBoard"
                 id="BasicBoard"
+                //this childWidth / 8 is the size of a square reactively
                 boardWidth={childWidth}
             />)}
 

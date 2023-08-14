@@ -441,6 +441,10 @@ export class Chess {
     this.loadElements(whiteElements, blackElements);
   }
 
+  getSEflag(){
+    return this._SEflag
+  }
+
   skipTurn(){
     this._SEflag = null
     this._turn = swapColor(this._turn)

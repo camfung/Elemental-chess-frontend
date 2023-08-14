@@ -36,12 +36,12 @@ const pieces = [
 const customPieces = (chess) => {
   const returnPieces = {};
   pieces.map((p, index) => {
-    returnPieces[p] = ({ square }) => (
+    returnPieces[p] = ({ square, squareWidth }) => (
       <div
         style={{
           backgroundImage: `url(${p})`,
           backgroundSize: "100%",
-          width: "70px",
+          width: squareWidth,
         }}
       >
         <ChessPiece
