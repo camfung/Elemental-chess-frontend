@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import './SavedTeams.css'
 import TeamDataGrid from '../../components/datadisplay/TeamDataGrid';
 
-const SavedTeams = ({ names }) => {
+const SavedTeams = ({ names, onConfirm, onCancel }) => {
 
     const styles = {
         backgroundColor: '#ffffffb6',
