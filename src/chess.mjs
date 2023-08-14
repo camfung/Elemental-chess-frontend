@@ -1142,22 +1142,37 @@ export class Chess {
       }
     }
     newBoard = this._board;
-
-    console.log(this.getElementAt(move.from));
-    console.log(this.getElementAt(move.to));
-    moveObj.captureType = ele.captureType(
-      this.getElementAt(move.from),
-      this.getElementAt(move.to)
-    );
     // console.log(moveObj.captureType)
 
     // /*
     //  * need to make a copy of move because we can't generate SAN after the move
     //  * is made
     //  */
+    const us = this._turn
+    const them = swapColor(us)
+    let capType = ele.captureType(this.getElementAt(move.from), this.getElementAt(move.to))
+    console.log('piece moved is ' + this.getElementAt(move.from))
+    if(capType != 'noCap'){
+        console.log('piece captured was ' + this.getElementAt(move.to))
+        console.log('the capture was ' + capType)} 
+    else console.log('No piece captured')
+    let nextMove = 'regular';
+    if(capType == 'superEffective'){
+        nextMove = move.to
+        this._makeMove(moveObj)
+    } else if(capType == 'immune'){
+        this._turn = them
+    } else if(capType == 'resisted'){
+        this._makeMove(moveObj)
+        delete this._board[Ox88[move.to]]
+        this._turn = them
+    } else {
+        this._makeMove(moveObj)
+        this._turn = them
+    }
 
     // const prettyMove = this._makePretty(moveObj)
-    this._makeMove(moveObj);
+    
     // this._positionCounts[prettyMove.after]++
     // newBoard = this._board
     // return prettyMove

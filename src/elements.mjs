@@ -97,6 +97,6 @@ export function captureType(attacker, defender) {
         if (elements[attacker].resistedBy.includes(defender)) return 'resisted'
         if (elements[attacker].immune.includes(defender)) return 'noEffect'
     } else {
-        return 'empty'
+        return 'noCap'
     }
 }

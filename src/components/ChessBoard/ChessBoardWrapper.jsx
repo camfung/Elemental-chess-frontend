@@ -41,6 +41,7 @@ const ChessboardWrapper = (props) => {
                 from: sourceSquare,
                 to: targetSquare,
             });
+            chess.current.ascii()
             setFen(chess.current.fen());
             console.log("🚀 ~ file: ChessBoardWrapper.jsx:44 ~ handleMove ~ move:", move)
             return true;
