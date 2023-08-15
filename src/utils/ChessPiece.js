@@ -1,5 +1,5 @@
 import React from "react";
-import { ChessPieceTypes, PokemonTypes } from "./Enums"; // Assuming the enum is named ChessPieceTypes
+import { ChessPieceTypes, PokemonTypes, colors } from "./Enums"; // Assuming the enum is named ChessPieceTypes
 import typeButton from "../assets/typeButton.png";
 import "../pages/TeamBuilder/GridOfButtons.css";
 import "./ChessPiece.css";
@@ -24,10 +24,17 @@ const styles = {
   width: "100%",
 };
 
-const ChessPiece = ({ color, type, elementalType, onClick, className }) => {
+const ChessPiece = ({
+  color,
+  type,
+  elementalType,
+  onClick,
+  className,
+  square,
+}) => {
   let imageSrc;
 
-  if (color === "black") {
+  if (color === colors.BLACK) {
     switch (type) {
       case ChessPieceTypes.KING:
         imageSrc = blackKing;
@@ -51,7 +58,7 @@ const ChessPiece = ({ color, type, elementalType, onClick, className }) => {
         // Handle default case
         break;
     }
-  } else if (color === "white") {
+  } else if (color === colors.WHITE) {
     switch (type) {
       case ChessPieceTypes.KING:
         imageSrc = whiteKing;

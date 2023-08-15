@@ -19,23 +19,6 @@ const getChessPieces = () => {
   };
 };
 
-// Assuming you have already defined the ChessPiece component
-const chessPieceMap = {
-  wP: <ChessPiece color="white" type="Pawn" elementalType="Fire" />,
-  wR: <ChessPiece color="white" type="Rook" elementalType="Grass" />,
-  wN: <ChessPiece color="white" type="Knight" elementalType="Flying" />,
-  wB: <ChessPiece color="white" type="Bishop" elementalType="Poison" />,
-  wQ: <ChessPiece color="white" type="Queen" elementalType="Electric" />,
-  wK: <ChessPiece color="white" type="King" elementalType="Ground" />,
-
-  bP: <ChessPiece color="black" type="Pawn" elementalType="Psychic" />,
-  bR: <ChessPiece color="black" type="Rook" elementalType="Ice" />,
-  bN: <ChessPiece color="black" type="Knight" elementalType="Bug" />,
-  bB: <ChessPiece color="black" type="Bishop" elementalType="Ghost" />,
-  bQ: <ChessPiece color="black" type="Queen" elementalType="Steel" />,
-  bK: <ChessPiece color="black" type="King" elementalType="Dark" />,
-};
-
 const pieces = [
   "wP",
   "wN",
@@ -50,18 +33,22 @@ const pieces = [
   "bQ",
   "bK",
 ];
-const customPieces = (types) => {
+const customPieces = (chess) => {
   const returnPieces = {};
   pieces.map((p, index) => {
-    returnPieces[p] = () => (
+    returnPieces[p] = ({ square, squareWidth }) => (
       <div
         style={{
           backgroundImage: `url(${p})`,
           backgroundSize: "100%",
-          width: "70px",
+          width: squareWidth,
         }}
       >
-        {chessPieceMap[p]}
+        <ChessPiece
+          type={chess.getPiece(square)?.type}
+          color={chess.getPiece(square)?.color}
+          elementalType={chess.getPiece(square)?.element}
+        />
       </div>
     );
     return null;

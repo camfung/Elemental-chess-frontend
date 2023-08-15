@@ -1,10 +1,15 @@
 export const ChessPieceTypes = {
-  PAWN: "Pawn",
-  ROOK: "Rook",
-  KNIGHT: "Knight",
-  BISHOP: "Bishop",
-  KING: "King",
-  QUEEN: "Queen",
+  PAWN: "p",
+  ROOK: "r",
+  KNIGHT: "n",
+  BISHOP: "b",
+  KING: "k",
+  QUEEN: "q",
+};
+
+export const colors = {
+  WHITE: "w",
+  BLACK: "b",
 };
 
 export const PokemonTypes = {

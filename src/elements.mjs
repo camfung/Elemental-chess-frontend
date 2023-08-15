@@ -94,9 +94,10 @@ const elements = {
 export function captureType(attacker, defender) {
     if (defender) {
         if (elements[attacker].superEffective.includes(defender)) return 'superEffective'
-        if (elements[attacker].resistedBy.includes(defender)) return 'resisted'
-        if (elements[attacker].immune.includes(defender)) return 'noEffect'
+        else if (elements[attacker].resistedBy.includes(defender)) return 'resisted'
+        else if (elements[attacker].immune.includes(defender)) return 'immune'
+        else return 'regular'
     } else {
-        return 'empty'
+        return 'noCap'
     }
 }

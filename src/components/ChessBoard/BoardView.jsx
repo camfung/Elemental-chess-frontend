@@ -34,7 +34,7 @@ const BoardView = () => {
 
     useEffect(() => {
         const isMobileView = () => {
-            return window.innerWidth <= 768; // Adjust the value as per your mobile view breakpoint
+            return window.innerWidth <= 768;
         };
 
         const handleResize = () => {
@@ -76,8 +76,8 @@ const BoardView = () => {
             {(childWidth && parentRef && <ChessboardWrapper
                 className="ChessBoard"
                 id="BasicBoard"
+                //this childWidth / 8 is the size of a square reactively
                 boardWidth={childWidth}
-            //  fen="r1bqkb1r/ppp1pppp/2n2n2/8/3P4/2N2N2/PPP2PPP/R1BQKB1R w KQkq - 3 6"
             />)}
 
             <PlayerHeader
