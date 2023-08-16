@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import PermanentDrawerLeft from '../../components/ui/navigation/PermanentDrawerLeft';
+import ResponsiveDrawer from '../../components/ui/navigation/ResponsiveDrawer';
 import GridOfButtons from './GridOfButtons';
 import SavedTeams from './SavedTeams';
 import TeamBuilderGrid from './TeamBuilderGrid'
@@ -108,7 +108,7 @@ const TeamBuilder = () => {
 
     return (
         <>
-            <PermanentDrawerLeft>
+            <ResponsiveDrawer>
                 <Grid container spacing={1} sx={{ maxWidth: '100%', margin: '0 auto', height: '90vh', justifyContent: 'space-between' }}>
                     {/* First column taking two-thirds of the width */}
                     <Grid item xs={9} sx={{ display: "grid", marginTop: '20px', marginBottom: '20px', padding: '10px', alignItems: 'center' }}>
@@ -144,7 +144,7 @@ const TeamBuilder = () => {
                     </Grid>
                 </Grid>
                 {/* <SnackBarWrapper message={message} severity="warning" /> */}
-            </PermanentDrawerLeft>
+            </ResponsiveDrawer>
         </>
     );
 };
