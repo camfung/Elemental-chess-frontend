@@ -19,7 +19,6 @@ const TypeGrid = () => {
         margin: "0 4px",
         fontSize: "14px",
         fontWeight: "bold",
-
     };
 
     const pokemonTypes = Object.values(PokemonTypes);
