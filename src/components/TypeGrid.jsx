@@ -26,7 +26,7 @@ const TypeGrid = () => {
     return (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
             {pokemonTypes.map((item, index) => (
-                <TypeToolTip displayedType={item.toLowerCase()}>
+                <TypeToolTip delay={0} displayedType={item.toLowerCase()}>
 
                     <button className='image-button'>
                         <img className={`typeButton ${capitalizeFirstLetter(item)}`} src={typeButton} />

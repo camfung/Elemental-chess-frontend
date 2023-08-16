@@ -2,7 +2,7 @@ import React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import Paper from "@mui/material/Paper";
 import capitalizeFirstLetter from "../utils/stringUtils";
-const TypeToolTip = ({ displayedType, children }) => {
+const TypeToolTip = ({ displayedType, children, delay }) => {
     const typeLabelStyles = {
         display: "inline-block",
         padding: "4px 8px",
@@ -145,6 +145,8 @@ const TypeToolTip = ({ displayedType, children }) => {
     return (
         <Tooltip
             disableInteractive
+            enterDelay={delay}
+            enterNextDelay={delay}
             arrow
             title={
                 <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
