@@ -8,7 +8,7 @@ import TeamBuilderGrid from './TeamBuilderGrid'
 import Switch from '@mui/material/Switch';
 import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import SnackBarWrapper from '../../components/ui/navigation/util/SnackBarWrapper';
+import { Snackbar, Alert } from '@mui/material';
 import { PokemonTypes } from '../../utils/Enums';
 import "./TeamBuilder.css"
 const styles = {
@@ -36,6 +36,9 @@ const TeamBuilder = () => {
     const [pieceElementalTypes, setPieceElementalTypes] = useState([["None", "None", "None", "None", "None", "None", "None", "None"], ["None", "None", "None", "None", "None", "None", "None", "None"]]);
     const [inGame, setInGame] = useState(false);
     const [selectedPiece, setSelectedPiece] = useState(null);
+    const [oneElement, setOneElement] = useState(false);
+    const [selectPiece, setSelectPiece] = useState(false);
+
 
     const resetTeamBuilderGrid = useCallback(() => {
 
@@ -105,11 +108,11 @@ const TeamBuilder = () => {
         const selectedType = e.target.innerHTML;
         console.log(selectedPiece);
         if (!selectedPiece) {
-            alert("Please select a piece");
+            setSelectPiece(true);
             return;
         }
         if (pieceElementalTypes.some(ele => ele.includes(selectedType))) {
-            alert("You can only have one of each type on your team");
+            setOneElement(true);
             setSelectedType(null);
             return;
         }
@@ -120,6 +123,12 @@ const TeamBuilder = () => {
         });
         setSelectedPiece(null);
     }, [selectedPiece]);
+    const handleTypeClose = () => {
+        setOneElement(false);
+    }
+    const handlePieceClose = () => {
+        setSelectPiece(false);
+    }
     // setSelectedType(e.target.innerHTML);
     const handleTeamBuilderGridClick = useCallback((row, col) => {
         setSelectedPiece({ row: row, col: col });
@@ -128,6 +137,32 @@ const TeamBuilder = () => {
     return (
         <>
             <ResponsiveDrawer>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    open={oneElement}
+                    autoHideDuration={6000}
+                    onClose={handleTypeClose}
+                >
+                    <Alert severity="warning" >
+                        You can only have one of each type on your team!
+                    </Alert>
+                </Snackbar>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    open={selectPiece}
+                    autoHideDuration={2000}
+                    onClose={handlePieceClose}
+                >
+                    <Alert severity="warning" >
+                        Please select a piece!
+                    </Alert>
+                </Snackbar>
                 <Grid container spacing={1} sx={{ maxWidth: '100%', margin: '0 auto', height: '90vh', justifyContent: 'space-between' }}>
                     {/* First column taking two-thirds of the width */}
                     <Grid item xs={9} sx={{ display: "grid", marginTop: '20px', marginBottom: '20px', padding: '10px', alignItems: 'center' }}>
