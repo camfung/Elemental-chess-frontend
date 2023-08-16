@@ -6,5 +6,22 @@
 } */
 
 .typeLabelCover {
-    translate: 0 -250%;
+    translate: 0 -140%;
+}
+
+.container {
+    height: 0px
+}
+
+.ele-text {
+    font-size: 20%;
+    max-width: 100%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    /* padding: 8px 8px; */
+    /* border-radius: 4px; */
 }

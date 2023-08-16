@@ -89,17 +89,20 @@ const ChessPiece = ({
 
   return (
     <>
+    <div className="container">
       <img style={styles} src={imageSrc} alt={`${color} ${type}`} />
       {elementalType && (
-        <button onClick={onClick} className="image-button typeLabelCover">
+        <div className="image-button typeLabelCover">
           <img
             className={`typeLabel ${elementalType} ${className}`}
             src={typeButton}
           />
-          <span className="button-text piece-text">{elementalType}</span>
-        </button>
+          <span className="ele-text ">{elementalType}</span>
+        </div>
       )}
+      </div>
     </>
+    
   );
 };
 
