@@ -25,6 +25,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 import * as ele from "./elements.mjs";
+import * as rec from "./recording.mjs"
 export const WHITE = "w";
 export const BLACK = "b";
 export const PAWN = "p";
@@ -436,9 +437,11 @@ export class Chess {
   _castling = { w: 0, b: 0 };
   _positionCounts = {};
   _SEflag = null;
+  _record
   constructor(whiteElements, blackElements) {
     this.load(DEFAULT_POSITION);
     this.loadElements(whiteElements, blackElements);
+    this._record = new rec.Recording()
   }
 
   getSEflag(){
@@ -481,6 +484,13 @@ export class Chess {
   getElementAt(spot) {
     try {
       return this._board[Ox88[spot]].element;
+    } catch (error) {
+      return null;
+    }
+  }
+  getTypetAt(spot) {
+    try {
+      return this._board[Ox88[spot]].type;
     } catch (error) {
       return null;
     }
@@ -1110,6 +1120,8 @@ export class Chess {
     return moves;
   }
   move(move, { strict = false } = {}) {
+    const attacker = this.getTypetAt(move.from)
+    const defender = this.getTypetAt(move.to)
     
     let newBoard = this._board;
     /*
@@ -1166,7 +1178,7 @@ export class Chess {
     const them = swapColor(us)
     let capType = ele.captureType(this.getElementAt(move.from), this.getElementAt(move.to))
     console.log('piece moved is ' + this.getElementAt(move.from))
-    if(capType != 'noCap'){
+    if(capType){
         console.log('piece captured was ' + this.getElementAt(move.to))
         console.log('the capture was ' + capType)} 
     else console.log('No piece captured')
@@ -1189,12 +1201,8 @@ export class Chess {
         this._turn = them
         this._SEflag = null
     }
-
-    // const prettyMove = this._makePretty(moveObj)
+    this._record.enterMove(move.from, move.to, attacker, defender, capType)
     
-    // this._positionCounts[prettyMove.after]++
-    // newBoard = this._board
-    // return prettyMove
   }
   _push(move) {
     this._history.push({
