@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,7 +13,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Logo from '../../../assets/logo-color-cropped.png';
 import { useNavigate } from 'react-router-dom';
-
 // Import the CSS class for the link cursor
 import './PermanentDrawer.css';
 
@@ -21,10 +20,10 @@ const drawerWidth = 240;
 
 export default function PermanentDrawerLeft(props) {
   const navigate = useNavigate();
-
   // Function to handle page navigation
   const handlePageNavigation = (pageName) => {
-    console.log(`Navigating to ${pageName}`)
+
+    // console.log(`Navigating to ${pageName}`)
     navigate(`/${pageName}`);
   };
 
@@ -41,10 +40,9 @@ export default function PermanentDrawerLeft(props) {
             color: 'white',
           },
         }}
-        variant="permanent"
         anchor="left"
       >
-        <img src={Logo} className='link-cursor' alt="Logo" />
+        <img src={Logo} style={{ width: "100%" }} className='link-cursor' alt="Logo" />
         <Divider />
         <List>
           {[

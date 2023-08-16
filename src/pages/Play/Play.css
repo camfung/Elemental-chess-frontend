@@ -1,0 +1,9 @@
+.play {
+    display: flex; /* Display children side by side */
+  }
+  
+  @media (max-width: 768px) { /* Media query for tablet or smaller */
+    .play {
+      flex-direction: column; /* Stack children vertically */
+    }
+  }

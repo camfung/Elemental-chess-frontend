@@ -6,6 +6,11 @@ export const ChessPieceTypes = {
   KING: "k",
   QUEEN: "q",
 };
+export const VIEWPORT = {
+  MOBILE: "mobile",
+  TABLET: "tablet",
+  COMPUTER: "computer",
+};
 
 export const colors = {
   WHITE: "w",

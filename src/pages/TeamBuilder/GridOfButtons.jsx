@@ -12,18 +12,20 @@ const GridOfButtons = (props) => {
   } = props;
   return (
     <Grid className='back-fade' container spacing={1} style={{ width: '100%' }}>
-      {Object.values(PokemonTypes).map((type, index) => ( // Using Object.values to get the enum values
-        <Grid item xs={6} sm={4} md={2} key={type}>
-          <div className='highlight'>
-            <TypeToolTip displayedType={type.toLowerCase()}>
-              <button onClick={(e) => { handleGridOfButtonsClick(e) }} id={index} className='image-button'>
-                <img className={`typeButton ${type}`} src={typeButton} alt={type} />
-                <span className="button-text type-text">{type}</span>
-              </button>
-            </TypeToolTip>
-          </div>
-        </Grid>
-      ))}
+      <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+        {Object.values(PokemonTypes).map((type, index) => ( // Using Object.values to get the enum values
+          <Grid item xs={6} sm={4} md={2} key={type}>
+            <div className='highlight'>
+              <TypeToolTip displayedType={type.toLowerCase()}>
+                <button onClick={(e) => { handleGridOfButtonsClick(e) }} id={index} className='image-button'>
+                  <img className={`typeButton ${type}`} src={typeButton} alt={type} />
+                  <span className="button-text type-text">{type}</span>
+                </button>
+              </TypeToolTip>
+            </div>
+          </Grid>
+        ))}
+      </div>
       {props.children}
     </Grid>
   );
