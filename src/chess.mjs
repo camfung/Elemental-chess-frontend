@@ -1121,9 +1121,9 @@ export class Chess {
   }
   move(move, { strict = false } = {}) {
     const attacker = this.getTypetAt(move.from)
+    const attackerEle = this.getElementAt(move.from)
     const defender = this.getTypetAt(move.to)
-    
-    let newBoard = this._board;
+    const defenderEle = this.getElementAt(move.to)
     /*
      * The move function can be called with in the following parameters:
      *
@@ -1164,7 +1164,7 @@ export class Chess {
         throw new Error(`Invalid move: ${JSON.stringify(move)}`);
       }
     }
-    newBoard = this._board;
+    
     // console.log(moveObj.captureType)
 
     // /*
@@ -1182,26 +1182,41 @@ export class Chess {
         console.log('piece captured was ' + this.getElementAt(move.to))
         console.log('the capture was ' + capType)} 
     else console.log('No piece captured')
+    
+    let castleType = null;
+    console.log(moveObj.flags & BITS.QSIDE_CASTLE)
+    if(moveObj.flags & BITS.QSIDE_CASTLE != 0){
+      castleType = 'queen'
+    }
+    if(moveObj.flags & BITS.KSIDE_CASTLE){
+      castleType = 'king'
+    }
     // let nextMove = 'regular';
     if(capType == 'superEffective'){
         //nextMove = move.to
         this._makeMove(moveObj)
+        this._record.enterMove(move.from, move.to, attacker, defender, attackerEle, defenderEle, capType, castleType)
         this._SEflag = move.to
         this._turn = swapColor(this._turn)
     } else if(capType == 'immune'){
+      this._record.enterMove(move.from, move.to, attacker, defender, attackerEle, defenderEle, capType, castleType)
         this._turn = them
         this._SEflag = null
     } else if(capType == 'resisted'){
         this._makeMove(moveObj)
+        this._record.enterMove(move.from, move.to, attacker, defender, attackerEle, defenderEle, capType, castleType)
         delete this._board[Ox88[move.to]]
         this._turn = them
         this._SEflag = null
     } else {
         this._makeMove(moveObj)
+        this._record.enterMove(move.from, move.to, attacker, defender, attackerEle, defenderEle, capType, castleType)
         this._turn = them
         this._SEflag = null
     }
-    this._record.enterMove(move.from, move.to, attacker, defender, capType)
+    
+    
+    
     
   }
   _push(move) {
