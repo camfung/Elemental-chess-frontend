@@ -8,11 +8,12 @@ export class Recording {
         this.recordString = recordString;
     }
 
-    enterMove(from, to, piece, capture, capType) {
+    enterMove(from, to, piece, capture, atkEle, capEle, capType, castleType) {
         // New turn
         
         if (!this.chainFlag) {
-            
+
+
             if (this.whiteTurn) {
                 if(this.turnCount != 0) this.recordString += '\n'
                 this.turnCount++;
@@ -22,36 +23,48 @@ export class Recording {
                 this.recordString += ', ';
                 this.whiteTurn = true;
             }
-            console.log(piece)
-            this.recordString += (piece == 'p' ? '' : piece.toUpperCase())  + from + (capture ? 'x' : '->');
+            console.log(getAbbreviation(atkEle))
+            if(castleType == 'king'){
+                this.recordString += 'O-O'
+            } else if (castleType == 'queen') {
+                this.recordString += 'O-O-O'
+            } else {
+            this.recordString += getAbbreviation(atkEle) + (piece.toUpperCase())  + from + (capture ? '-x' : '->')
+            }
+            //piece == 'p' ? '' : 
         }
         let mod = ''
 
         if (capType) {
+            mod += this.chainFlag ? ',' : '';
             switch (capType) {
                 case 'resisted':
-                    mod = '-';
+                    mod += '-';
                     break;
                 case 'superEffective':
-                    mod = this.chainFlag ? ',' : '(';
+                    mod += this.chainFlag ? '' : '(';
                     this.chainFlag = true;
                     break;
                 case 'immune':
-                    mod = '~';
+                    mod += '~';
                     break;
                 default:
-                    mod = '';
             }
         }
         let end = ''
         if(this.chainFlag && !capture){
             mod = ')'
+            this.chainFlag = false
         }
         if(this.chainFlag && capture && capType !== 'superEffective'){
             end = ')'
             this.chainFlag = false
         }
-        this.recordString += mod + to + end;
+        let pieceTaken = ''
+        if(capture){
+            pieceTaken = getAbbreviation(capEle) + capture.toUpperCase()
+        }
+        this.recordString += mod + pieceTaken + to + end;
     }
 
     skip() {
@@ -69,3 +82,32 @@ function bracketInsert(record) {
         return record;
     }
 }
+
+function getAbbreviation(pokemonType) {
+    const typeMappings = {
+        Normal: 'nm',
+        Fighting: 'ft',
+        Flying: 'fy',
+        Poison: 'ps',
+        Ground: 'gd',
+        Rock: 'rk',
+        Bug: 'bg',
+        Ghost: 'gh',
+        Steel: 'st',
+        Fire: 'fr',
+        Water: 'wr',
+        Grass: 'gs',
+        Electric: 'el',
+        Psychic: 'py',
+        Ice: 'ic',
+        Dragon: 'dr',
+        Dark: 'dk',
+        Fairy: 'fy'
+    };
+    
+
+    return typeMappings[pokemonType] || 'unk'; // Default to 'unk' if type is not found
+}
+
+function
+ 
