@@ -42,6 +42,7 @@ async function main() {
     }
     console.log(chess.ascii());
     console.log(chess._record.recordString)
+    
     //chess.stateType('e4')
   }
 

@@ -1,14 +1,20 @@
 export class Recording {
     recordString = '';
+    packedString = ''
     chainFlag = false;
     whiteTurn = true;
     turnCount = 0;
 
-    constructor(recordString = '') {
+    constructor(recordString = '', packedString = '') {
         this.recordString = recordString;
+        this.packedString = packedString;
     }
 
     enterMove(from, to, piece, capture, atkEle, capEle, capType, castleType) {
+        // make paacked
+        let packedMove = this.pack(from, to)
+        console.log(packedMove)
+        console.log(this.unpack(packedMove))
         // New turn
         
         if (!this.chainFlag) {
@@ -23,7 +29,6 @@ export class Recording {
                 this.recordString += ', ';
                 this.whiteTurn = true;
             }
-            console.log(getAbbreviation(atkEle))
             if(castleType == 'king'){
                 this.recordString += 'O-O'
             } else if (castleType == 'queen') {
@@ -71,6 +76,33 @@ export class Recording {
         this.recordString += ')s';
         this.chainFlag = false;
     }
+
+    pack(loc1, loc2) {
+        const toNumber = (loc) => {
+          const col = loc.charCodeAt(0) - 'a'.charCodeAt(0);
+          const row = parseInt(loc[1]) - 1;
+          return row * 8 + col;
+        };
+      
+        const packedValue = (toNumber(loc1) << 6) | toNumber(loc2);
+        return String.fromCharCode(packedValue);
+      }
+      
+     unpack(char) {
+        const toLocation = (num) => {
+          const col = num % 8;
+          const row = Math.floor(num / 8) + 1;
+          return String.fromCharCode(col + 'a'.charCodeAt(0)) + row;
+        };
+      
+        const packedValue = char.charCodeAt(0);
+        const num1 = packedValue >> 6;
+        const num2 = packedValue & 63;
+      
+        return [toLocation(num1), toLocation(num2)];
+      
+    }
+      
 }
 
 function bracketInsert(record) {
@@ -108,6 +140,3 @@ function getAbbreviation(pokemonType) {
 
     return typeMappings[pokemonType] || 'unk'; // Default to 'unk' if type is not found
 }
-
-function
- 

@@ -1120,10 +1120,12 @@ export class Chess {
     return moves;
   }
   move(move, { strict = false } = {}) {
+
     const attacker = this.getTypetAt(move.from)
     const attackerEle = this.getElementAt(move.from)
     const defender = this.getTypetAt(move.to)
     const defenderEle = this.getElementAt(move.to)
+    
     /*
      * The move function can be called with in the following parameters:
      *
@@ -1177,19 +1179,20 @@ export class Chess {
     const us = this._turn
     const them = swapColor(us)
     let capType = ele.captureType(this.getElementAt(move.from), this.getElementAt(move.to))
-    console.log('piece moved is ' + this.getElementAt(move.from))
-    if(capType){
-        console.log('piece captured was ' + this.getElementAt(move.to))
-        console.log('the capture was ' + capType)} 
-    else console.log('No piece captured')
+    // console.log('piece moved is ' + this.getElementAt(move.from))
+    // if(capType){
+    //     console.log('piece captured was ' + this.getElementAt(move.to))
+    //     console.log('the capture was ' + capType)} 
+    // else console.log('No piece captured')
     
     let castleType = null;
-    console.log(moveObj.flags & BITS.QSIDE_CASTLE)
-    if(moveObj.flags & BITS.QSIDE_CASTLE != 0){
+    if(moveObj.flags & BITS.QSIDE_CASTLE){
       castleType = 'queen'
+      console.log('Qside')
     }
     if(moveObj.flags & BITS.KSIDE_CASTLE){
       castleType = 'king'
+      console.log('Kside')
     }
     // let nextMove = 'regular';
     if(capType == 'superEffective'){
