@@ -5,19 +5,25 @@ import "../pages/TeamBuilder/GridOfButtons.css";
 import "./ChessPiece.css";
 
 // Black Pieces
-import blackKing from "../assets/chesspieces/blackKing.png";
-import blackQueen from "../assets/chesspieces/blackQueen.png";
+import blackKing from "../assets/chesspieces/singePiece3.png";
+// import blackKing from "../assets/chesspieces/blackKing.png";
+// import blackQueen from "../assets/chesspieces/blackQueen.png";
+import blackQueen from "../assets/chesspieces/singlePiece4.png";
 import blackRook from "../assets/chesspieces/blackRook.png";
 import blackBishop from "../assets/chesspieces/blackBishop.png";
-import blackKnight from "../assets/chesspieces/blackKnight.png";
+// import blackKnight from "../assets/chesspieces/blackKnight.png";
+import blackKnight from "../assets/chesspieces/fireknight.png";
 import blackPawn from "../assets/chesspieces/blackPawn.png";
 
 // White Pieces
-import whiteKing from "../assets/chesspieces/whiteKing.png";
-import whiteQueen from "../assets/chesspieces/whiteQueen.png";
+// import whiteKing from "../assets/chesspieces/whiteKing.png";
+import whiteKing from "../assets/chesspieces/singlePiece2.png";
+// import whiteQueen from "../assets/chesspieces/whiteQueen.png";
+import whiteQueen from "../assets/chesspieces/singlePiece.png";
 import whiteRook from "../assets/chesspieces/whiteRook.png";
 import whiteBishop from "../assets/chesspieces/whiteBishop.png";
-import whiteKnight from "../assets/chesspieces/whiteKnight.png";
+// import whiteKnight from "../assets/chesspieces/whiteKnight.png";
+import whiteKnight from "../assets/chesspieces/rooter.png";
 import whitePawn from "../assets/chesspieces/whitePawn.png";
 
 const styles = {
@@ -89,20 +95,19 @@ const ChessPiece = ({
 
   return (
     <>
-    <div className="container">
-      <img style={styles} src={imageSrc} alt={`${color} ${type}`} />
-      {elementalType && (
-        <div className="image-button typeLabelCover">
-          <img
-            className={`typeLabel ${elementalType} ${className}`}
-            src={typeButton}
-          />
-          <span className="ele-text ">{elementalType}</span>
-        </div>
-      )}
+      <div className="container">
+        <img style={styles} src={imageSrc} alt={`${color} ${type}`} />
+        {elementalType && (
+          <div className="image-button typeLabelCover">
+            <img
+              className={`typeLabel ${elementalType} ${className}`}
+              src={typeButton}
+            />
+            <span className="ele-text ">{elementalType}</span>
+          </div>
+        )}
       </div>
     </>
-    
   );
 };
 

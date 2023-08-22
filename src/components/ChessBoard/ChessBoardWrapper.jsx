@@ -18,12 +18,12 @@ const ChessboardWrapper = (props) => {
     const [moveTo, setMoveTo] = useState(null);
     const [SEflag, setSEflag] = useState(false)
     let whiteElements = [
-        ["Electric","Ground","Rock","Fire","Flying","Grass","Ice","Dark"],["Psychic","Water","Fairy","Normal","Dragon","Fighting","Poison","Ghost"]
+        ["Electric", "Ground", "Rock", "Fire", "Flying", "Grass", "Ice", "Dark"], ["Psychic", "Water", "Fairy", "Normal", "Dragon", "Fighting", "Poison", "Ghost"]
     ];
 
 
     let blackElements = [
-        ["Grass", "Psychic", "Dark", "Ice", "Steel", "Flying", "Fighting", "Bug"], ["Electric", "Fairy", "Ground", "Ghost", "Poison", "Dragon", "Rock", "Water"]
+        ["Grass", "Fire", "Dark", "Ice", "Steel", "Flying", "Fighting", "Bug"], ["Electric", "Fairy", "Ground", "Ghost", "Poison", "Dragon", "Rock", "Water"]
     ];
 
 
@@ -47,8 +47,8 @@ const ChessboardWrapper = (props) => {
             //chess.current.ascii()
             setFen(chess.current.fen());
             console.log("🚀 ~ file: ChessBoardWrapper.jsx:44 ~ handleMove ~ move:", move)
-            if(chess.current.getSEflag()){
-                
+            if (chess.current.getSEflag()) {
+
                 setSEflag(true)
             } else {
                 setSEflag(false)
@@ -81,8 +81,8 @@ const ChessboardWrapper = (props) => {
                     boxShadow: "0 2px 10px rgba(0, 0, 0, 0.5)",
                 }}
             />
-            
-            {SEflag&&<Paper style={{display:'flex', justifyContent: 'center'}}><Button variant='contain' onClick={handleSkip}>Skip Move</Button></Paper>}
+
+            {SEflag && <Paper style={{ display: 'flex', justifyContent: 'center' }}><Button variant='contain' onClick={handleSkip}>Skip Move</Button></Paper>}
         </>
     );
 };

@@ -19,7 +19,7 @@ import Typography from '@mui/material/Typography';
 import Logo from '../../../assets/logo-color-cropped.png';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { VIEWPORT } from '../../../utils/Enums';
+import { useAuth0 } from "@auth0/auth0-react";
 import "./PermanentDrawer.css"
 
 const drawerWidth = 240;
@@ -27,6 +27,21 @@ const drawerWidth = 240;
 function ResponsiveDrawer(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(true);
+
+    const {
+        // Auth state:
+        error,
+        isAuthenticated,
+        isLoading,
+        user,
+        // Auth methods:
+        getAccessTokenSilently,
+        getAccessTokenWithPopup,
+        getIdTokenClaims,
+        loginWithRedirect,
+        loginWithPopup,
+        logout,
+    } = useAuth0();
 
     const navigate = useNavigate();
     const handleDrawerToggle = () => {
@@ -46,7 +61,7 @@ function ResponsiveDrawer(props) {
                     { pageName: 'how-to-play', label: 'How To Play' },
                     { pageName: 'type-chart', label: 'Type Chart' },
                     { pageName: 'bug-reporting', label: 'Bug Reporting' },
-                    { pageName: 'sign-out', label: 'Sign Out' },
+
                 ].map((item, index) => (
                     <ListItem key={item.label} disablePadding>
                         {/* Use ListItemButton with an onClick handler and apply the link-cursor class */}
@@ -55,6 +70,35 @@ function ResponsiveDrawer(props) {
                         </ListItemButton>
                     </ListItem>
                 ))}
+                {!isAuthenticated && (
+                    <ListItem key={"login"} disablePadding>
+                        {/* Use ListItemButton with an onClick handler and apply the link-cursor class */}
+                        <ListItemButton className="link-cursor" onClick={() => {
+                            loginWithPopup();
+                        }}>
+                            <ListItemText primary={"Login"} />
+                        </ListItemButton>
+                    </ListItem>
+                )}
+                {isAuthenticated && (
+                    <ListItem key={"login"} disablePadding>
+                        {/* Use ListItemButton with an onClick handler and apply the link-cursor class */}
+                        <ListItemButton className="link-cursor" onClick={() => {
+                            handlePageNavigation("profile")
+                        }}>
+                            <ListItemText primary={"Profile"} />
+                        </ListItemButton>
+                    </ListItem>
+                )}
+                {isAuthenticated && (
+                    <ListItem key={"signout"} disablePadding>
+                        {/* Use ListItemButton with an onClick handler and apply the link-cursor class */}
+                        <ListItemButton className="link-cursor" onClick={() => { logout() }}>
+                            <ListItemText primary={"Sign out"} />
+                        </ListItemButton>
+                    </ListItem>
+                )}
+
             </List>
         </div >
     );
