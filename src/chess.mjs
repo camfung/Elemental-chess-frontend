@@ -444,6 +444,10 @@ export class Chess {
     this._record = new rec.Recording()
   }
 
+  getMoveHistory(){
+    return this._record.recordString
+  }
+
   getSEflag(){
     return this._SEflag
   }
