@@ -448,6 +448,10 @@ export class Chess {
     return this._record.recordString
   }
 
+  getPackedHistory(){
+    return this._record.packedString
+  }
+
   getSEflag(){
     return this._SEflag
   }
@@ -455,6 +459,7 @@ export class Chess {
   skipTurn(){
     this._SEflag = null
     this._turn = swapColor(this._turn)
+    this._record.skip()
   }
 
   loadElements(white, black) {

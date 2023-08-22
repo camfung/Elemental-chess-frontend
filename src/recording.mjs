@@ -25,7 +25,7 @@ export class Recording {
                 this.recordString += this.turnCount + ': ';
                 this.whiteTurn = false;
             } else {
-                this.recordString += ', ';
+                this.recordString += ',  ';
                 this.whiteTurn = true;
             }
             if(castleType == 'king'){
@@ -33,7 +33,8 @@ export class Recording {
             } else if (castleType == 'queen') {
                 this.recordString += 'O-O-O'
             } else {
-            this.recordString += getAbbreviation(atkEle) + (piece.toUpperCase())  + from + (capture ? '-x' : '->')
+             this.recordString += getAbbreviation(atkEle) + (piece.toUpperCase())  + from + (capture ? ' -x ' : ' -> ')
+    
             }
             //piece == 'p' ? '' : 
         }
