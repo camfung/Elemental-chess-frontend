@@ -13,8 +13,7 @@ export class Recording {
     enterMove(from, to, piece, capture, atkEle, capEle, capType, castleType) {
         // make paacked
         let packedMove = this.pack(from, to)
-        console.log(packedMove)
-        console.log(this.unpack(packedMove))
+        this.packedString += packedMove
         // New turn
         
         if (!this.chainFlag) {
