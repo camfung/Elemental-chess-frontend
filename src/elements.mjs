@@ -42,7 +42,7 @@ const elements = {
     "Ground": {
         "superEffective": ["Fire", "Electric", "Poison", "Rock", "Steel"],
         "resistedBy": ["Grass", "Ice", "Water"],
-        "immune": ["Electric"]
+        "immune": ["Flying"]
     },
     "Flying": {
         "superEffective": ["Grass", "Fighting", "Bug"],
