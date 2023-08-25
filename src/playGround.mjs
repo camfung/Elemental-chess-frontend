@@ -49,4 +49,10 @@ async function main() {
   rl.close();
 }
 
-main();
+function EPtest(sq){
+  console.log(chess.enPassantSpotConversion(sq))
+  return
+}
+
+//main();
+EPtest('e4')
