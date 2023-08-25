@@ -444,6 +444,17 @@ export class Chess {
     this._record = new rec.Recording()
   }
 
+  enPassantSpotConversion(sq){
+    let rank = sq.charAt(0)
+    let file = sq.charCodeAt(1)
+    if(this._turn === BLACK){
+      file += 1
+    } else {
+      file -= 1
+    }
+    return '' + rank + String.fromCharCode(file)
+  } 
+
   getMoveHistory(){
     return this._record.recordString
   }
@@ -670,13 +681,13 @@ export class Chess {
             captured: PAWN,
             flags: BITS.EP_CAPTURE,
           });
-          const isLegal = !this._isKingAttacked(color);
+          
           this._undoMove();
           // if ep is legal, break and set the ep square in the FEN output
-          if (isLegal) {
+          
             epSquare = algebraic(this._epSquare);
             break;
-          }
+          
         }
       }
     }
@@ -1187,7 +1198,13 @@ export class Chess {
     }
     const us = this._turn
     const them = swapColor(us)
-    let capType = ele.captureType(this.getElementAt(move.from), this.getElementAt(move.to))
+    let capType;
+    if(moveObj.flags & BITS.EP_CAPTURE){
+      capType = ele.captureType(this.getElementAt(move.from), this.getElementAt(this.enPassantSpotConversion(move.to)))
+      console.log(this.enPassantSpotConversion(move.to))
+    } else {
+      capType = ele.captureType(this.getElementAt(move.from), this.getElementAt(move.to))
+    }
     // console.log('piece moved is ' + this.getElementAt(move.from))
     // if(capType){
     //     console.log('piece captured was ' + this.getElementAt(move.to))
@@ -1349,6 +1366,7 @@ export class Chess {
     const us = this._turn;
     const them = swapColor(us);
     this._board[move.from] = this._board[move.to];
+    let element = this._board[move.from].element
     this._board[move.from].type = move.piece; // to undo any promotions
     delete this._board[move.to];
     if (move.captured) {
@@ -1360,7 +1378,7 @@ export class Chess {
         } else {
           index = move.to + 16;
         }
-        this._board[index] = { type: PAWN, color: them, element: "test" };
+        this._board[index] = { type: PAWN, color: them, element: element };
       } else {
         // regular capture
         this._board[move.to] = {
