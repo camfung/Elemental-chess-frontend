@@ -33,7 +33,7 @@ export class Recording {
             } else if (castleType == 'queen') {
                 this.recordString += 'O-O-O'
             } else {
-             this.recordString += getAbbreviation(atkEle) + (piece.toUpperCase())  + from + (capture ? ' -x ' : ' -> ')
+             this.recordString += getAbbreviation(atkEle) + (piece.toUpperCase()) + (capture ? ' -x ' : ' -> ')
     
             }
             //piece == 'p' ? '' : 
