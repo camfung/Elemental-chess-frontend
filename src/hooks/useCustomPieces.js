@@ -45,9 +45,9 @@ const customPieces = (chess) => {
         }}
       >
         <ChessPiece
-          type={chess.getPiece(square)?.type}
-          color={chess.getPiece(square)?.color}
-          elementalType={chess.getPiece(square)?.element}
+          type={chess.current.getPiece(square)?.type}
+          color={chess.current.getPiece(square)?.color}
+          elementalType={chess.current.getPiece(square)?.element}
         />
       </div>
     );

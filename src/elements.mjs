@@ -98,6 +98,6 @@ export function captureType(attacker, defender) {
         else if (elements[attacker].immune.includes(defender)) return 'immune'
         else return 'regular'
     } else {
-        return 'noCap'
+        return null
     }
 }

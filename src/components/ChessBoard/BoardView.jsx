@@ -7,7 +7,8 @@ import "./BoardView.css"
 import PlayerHeader from './PlayerHeader';
 import ChessboardWrapper from './ChessBoardWrapper';
 
-const BoardView = () => {
+
+const BoardView = (props) => {
     const [opponentName, setOpponentName] = useState('Opponent');
     const [playerName, setPlayerName] = useState('LostPariah');
     const [opponentTimer, setOpponentTimer] = useState(0);
@@ -22,6 +23,7 @@ const BoardView = () => {
 
     const parentRef = useRef(null);
     const [childWidth, setChildWidth] = useState(0);
+    const {chess} = props;
 
 
     const changeTurn = () => {
@@ -62,6 +64,8 @@ const BoardView = () => {
         console.log(childWidth);
     }
 
+    
+
     return (
         <div class="board-view-wrapper" ref={parentRef}>
             <PlayerHeader
@@ -78,6 +82,7 @@ const BoardView = () => {
                 id="BasicBoard"
                 //this childWidth / 8 is the size of a square reactively
                 boardWidth={childWidth}
+                chess={chess}
             />)}
 
             <PlayerHeader
