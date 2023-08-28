@@ -219,7 +219,6 @@ const TypeToolTip = ({ displayedType, children, delay }) => {
             enterDelay={delay}
             enterNextDelay={delay}
             arrow
-            open={true}
             title={
                 <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
                     <Paper elevation={3} style={{ padding: "5px" }}>
