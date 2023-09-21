@@ -25,6 +25,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 import * as ele from "./elements.mjs";
+import * as rec from "./recording.mjs"
 export const WHITE = "w";
 export const BLACK = "b";
 export const PAWN = "p";
@@ -436,9 +437,30 @@ export class Chess {
   _castling = { w: 0, b: 0 };
   _positionCounts = {};
   _SEflag = null;
+  _record
   constructor(whiteElements, blackElements) {
     this.load(DEFAULT_POSITION);
     this.loadElements(whiteElements, blackElements);
+    this._record = new rec.Recording()
+  }
+
+  enPassantSpotConversion(sq){
+    let rank = sq.charAt(0)
+    let file = sq.charCodeAt(1)
+    if(this._turn === BLACK){
+      file += 1
+    } else {
+      file -= 1
+    }
+    return '' + rank + String.fromCharCode(file)
+  } 
+
+  getMoveHistory(){
+    return this._record.recordString
+  }
+
+  getPackedHistory(){
+    return this._record.packedString
   }
 
   getSEflag(){
@@ -448,6 +470,7 @@ export class Chess {
   skipTurn(){
     this._SEflag = null
     this._turn = swapColor(this._turn)
+    this._record.skip()
   }
 
   loadElements(white, black) {
@@ -481,6 +504,13 @@ export class Chess {
   getElementAt(spot) {
     try {
       return this._board[Ox88[spot]].element;
+    } catch (error) {
+      return null;
+    }
+  }
+  getTypetAt(spot) {
+    try {
+      return this._board[Ox88[spot]].type;
     } catch (error) {
       return null;
     }
@@ -651,13 +681,13 @@ export class Chess {
             captured: PAWN,
             flags: BITS.EP_CAPTURE,
           });
-          const isLegal = !this._isKingAttacked(color);
+          
           this._undoMove();
           // if ep is legal, break and set the ep square in the FEN output
-          if (isLegal) {
+          
             epSquare = algebraic(this._epSquare);
             break;
-          }
+          
         }
       }
     }
@@ -1110,8 +1140,12 @@ export class Chess {
     return moves;
   }
   move(move, { strict = false } = {}) {
+
+    const attacker = this.getTypetAt(move.from)
+    const attackerEle = this.getElementAt(move.from)
+    const defender = this.getTypetAt(move.to)
+    const defenderEle = this.getElementAt(move.to)
     
-    let newBoard = this._board;
     /*
      * The move function can be called with in the following parameters:
      *
@@ -1152,7 +1186,7 @@ export class Chess {
         throw new Error(`Invalid move: ${JSON.stringify(move)}`);
       }
     }
-    newBoard = this._board;
+    
     // console.log(moveObj.captureType)
 
     // /*
@@ -1164,37 +1198,55 @@ export class Chess {
     }
     const us = this._turn
     const them = swapColor(us)
-    let capType = ele.captureType(this.getElementAt(move.from), this.getElementAt(move.to))
-    console.log('piece moved is ' + this.getElementAt(move.from))
-    if(capType != 'noCap'){
-        console.log('piece captured was ' + this.getElementAt(move.to))
-        console.log('the capture was ' + capType)} 
-    else console.log('No piece captured')
+    let capType;
+    if(moveObj.flags & BITS.EP_CAPTURE){
+      capType = ele.captureType(this.getElementAt(move.from), this.getElementAt(this.enPassantSpotConversion(move.to)))
+      console.log(this.enPassantSpotConversion(move.to))
+    } else {
+      capType = ele.captureType(this.getElementAt(move.from), this.getElementAt(move.to))
+    }
+    // console.log('piece moved is ' + this.getElementAt(move.from))
+    // if(capType){
+    //     console.log('piece captured was ' + this.getElementAt(move.to))
+    //     console.log('the capture was ' + capType)} 
+    // else console.log('No piece captured')
+    
+    let castleType = null;
+    if(moveObj.flags & BITS.QSIDE_CASTLE){
+      castleType = 'queen'
+      console.log('Qside')
+    }
+    if(moveObj.flags & BITS.KSIDE_CASTLE){
+      castleType = 'king'
+      console.log('Kside')
+    }
     // let nextMove = 'regular';
     if(capType == 'superEffective'){
         //nextMove = move.to
         this._makeMove(moveObj)
+        this._record.enterMove(move.from, move.to, attacker, defender, attackerEle, defenderEle, capType, castleType)
         this._SEflag = move.to
         this._turn = swapColor(this._turn)
     } else if(capType == 'immune'){
+      this._record.enterMove(move.from, move.to, attacker, defender, attackerEle, defenderEle, capType, castleType)
         this._turn = them
         this._SEflag = null
     } else if(capType == 'resisted'){
         this._makeMove(moveObj)
+        this._record.enterMove(move.from, move.to, attacker, defender, attackerEle, defenderEle, capType, castleType)
         delete this._board[Ox88[move.to]]
         this._turn = them
         this._SEflag = null
     } else {
         this._makeMove(moveObj)
+        this._record.enterMove(move.from, move.to, attacker, defender, attackerEle, defenderEle, capType, castleType)
         this._turn = them
         this._SEflag = null
     }
-
-    // const prettyMove = this._makePretty(moveObj)
     
-    // this._positionCounts[prettyMove.after]++
-    // newBoard = this._board
-    // return prettyMove
+    
+    
+    
   }
   _push(move) {
     this._history.push({
@@ -1314,6 +1366,7 @@ export class Chess {
     const us = this._turn;
     const them = swapColor(us);
     this._board[move.from] = this._board[move.to];
+    let element = this._board[move.from].element
     this._board[move.from].type = move.piece; // to undo any promotions
     delete this._board[move.to];
     if (move.captured) {
@@ -1325,7 +1378,7 @@ export class Chess {
         } else {
           index = move.to + 16;
         }
-        this._board[index] = { type: PAWN, color: them, element: "test" };
+        this._board[index] = { type: PAWN, color: them, element: element };
       } else {
         // regular capture
         this._board[move.to] = {

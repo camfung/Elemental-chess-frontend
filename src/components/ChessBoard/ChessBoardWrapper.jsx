@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import * as Chess from '../../chess.mjs';
+
 // import { Chessboard } from 'react-chessboard';
 import * as chessboardModule from '../../dist/index.js';
 import { customPieces } from '../../hooks/useCustomPieces';
@@ -11,23 +11,14 @@ const ChessboardWrapper = (props) => {
     const {
         boardWidth,
         lightSquareColor = "rgb(219, 219, 219)",
-        darkSquareColor = 'rgb(202, 0, 0)'
+        darkSquareColor = 'rgb(202, 0, 0)',
+        chess
     } = props;
     const [fen, setFen] = useState("start");
     const [moveFrom, setMoveFrom] = useState("");
     const [moveTo, setMoveTo] = useState(null);
     const [SEflag, setSEflag] = useState(false)
-    let whiteElements = [
-        ["Electric", "Ground", "Rock", "Fire", "Flying", "Grass", "Ice", "Dark"], ["Psychic", "Water", "Fairy", "Normal", "Dragon", "Fighting", "Poison", "Ghost"]
-    ];
 
-
-    let blackElements = [
-        ["Grass", "Fire", "Dark", "Ice", "Steel", "Flying", "Fighting", "Bug"], ["Electric", "Fairy", "Ground", "Ghost", "Poison", "Dragon", "Rock", "Water"]
-    ];
-
-
-    const chess = useRef(new Chess.Chess(whiteElements, blackElements));
 
     // const chess = useRef(new Chess.Chess());
 
@@ -44,7 +35,7 @@ const ChessboardWrapper = (props) => {
                 from: sourceSquare,
                 to: targetSquare,
             });
-            //chess.current.ascii()
+
             setFen(chess.current.fen());
             console.log("🚀 ~ file: ChessBoardWrapper.jsx:44 ~ handleMove ~ move:", move)
             if (chess.current.getSEflag()) {
@@ -75,7 +66,7 @@ const ChessboardWrapper = (props) => {
                 boardWidth={boardWidth}
                 customLightSquareStyle={{ backgroundColor: lightSquareColor }}
                 customDarkSquareStyle={{ backgroundColor: darkSquareColor }}
-                customPieces={customPieces(chess.current)}
+                customPieces={customPieces(chess)}
                 customBoardStyle={{
                     borderRadius: "4px",
                     boxShadow: "0 2px 10px rgba(0, 0, 0, 0.5)",

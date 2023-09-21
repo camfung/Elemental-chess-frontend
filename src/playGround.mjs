@@ -7,13 +7,13 @@ const rl = createInterface({
 });
 
 let whiteElements = [
-  ['Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal'],
+  ['Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting'],
   ['Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal']
 ];
 
 
 let blackElements = [
-  ['Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting'],
+  ['Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting'],
   ['Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting', 'Fighting']
 ];
 
@@ -33,7 +33,6 @@ async function inp() {
 
 async function main() {
   while (!chess.isGameOver()) {
-    console.log('SEflag ' + chess._SEflag)
     const { from, to } = await inp();
     try {
       chess.move({ from, to });
@@ -42,10 +41,18 @@ async function main() {
       console.log(error)
     }
     console.log(chess.ascii());
+    console.log(chess._record.recordString)
+    
     //chess.stateType('e4')
   }
 
   rl.close();
 }
 
-main();
+function EPtest(sq){
+  console.log(chess.enPassantSpotConversion(sq))
+  return
+}
+
+//main();
+EPtest('e4')

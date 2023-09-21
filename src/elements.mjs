@@ -42,7 +42,7 @@ const elements = {
     "Ground": {
         "superEffective": ["Fire", "Electric", "Poison", "Rock", "Steel"],
         "resistedBy": ["Grass", "Ice", "Water"],
-        "immune": ["Electric"]
+        "immune": ["Flying"]
     },
     "Flying": {
         "superEffective": ["Grass", "Fighting", "Bug"],
@@ -98,6 +98,6 @@ export function captureType(attacker, defender) {
         else if (elements[attacker].immune.includes(defender)) return 'immune'
         else return 'regular'
     } else {
-        return 'noCap'
+        return null
     }
 }
