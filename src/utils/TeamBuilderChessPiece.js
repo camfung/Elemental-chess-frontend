@@ -2,7 +2,7 @@ import React from "react";
 import { ChessPieceTypes, PokemonTypes, colors } from "./Enums"; // Assuming the enum is named ChessPieceTypes
 import typeButton from "../assets/typeButton.png";
 import "../pages/TeamBuilder/GridOfButtons.css";
-import "./ChessPiece.css";
+import "./TeamBuilderChessPiece.css";
 
 // Black Pieces
 import blackKing from "../assets/chesspieces/blackKing.png";
@@ -89,16 +89,16 @@ const ChessPiece = ({
 
   return (
     <>
-      <div className="container">
+      <div className="wrapper">
         <img style={styles} src={imageSrc} alt={`${color} ${type}`} />
         {elementalType && (
-          <div className="image-button typeLabelCover">
+          <button onClick={onClick} className="image-button typeLabelCover">
             <img
               className={`typeLabel ${elementalType} ${className}`}
               src={typeButton}
             />
-            <span className="ele-text ">{elementalType}</span>
-          </div>
+            <span className="typeText">{elementalType}</span>
+          </button>
         )}
       </div>
     </>
