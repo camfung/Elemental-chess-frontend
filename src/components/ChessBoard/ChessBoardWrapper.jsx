@@ -44,10 +44,10 @@ const ChessboardWrapper = (props) => {
             } else {
                 setSEflag(false)
             }
-            console.log('SEflag set to ' + setSEflag)
+            
             return true;
         } catch (e) {
-            console.log('SEflag set to ' + setSEflag + 'error\n ' + e)
+            console.log('error\n ' + e)
             return false;
         }
     };
@@ -56,6 +56,10 @@ const ChessboardWrapper = (props) => {
         setSEflag(false)
         chess.current.skipTurn()
         console.log('skip')
+    }
+
+    const sendMove = (move) => {
+        
     }
 
     return (

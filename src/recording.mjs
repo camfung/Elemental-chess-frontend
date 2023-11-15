@@ -1,19 +1,20 @@
 export class Recording {
     recordString = '';
-    packedString = ''
+    packedArray = []
     chainFlag = false;
     whiteTurn = true;
-    turnCount = 0;
+    turnCount = -1;
 
-    constructor(recordString = '', packedString = '') {
+    constructor(recordString = '', packedArray = []) {
         this.recordString = recordString;
-        this.packedString = packedString;
+        this.packedArray = packedArray;
     }
 
     enterMove(from, to, piece, capture, atkEle, capEle, capType, castleType) {
-        // make paacked
+        // make packed
         let packedMove = this.pack(from, to)
-        this.packedString += packedMove
+        
+        this.packedArray.push(packedMove)
         // New turn
         
         if (!this.chainFlag) {
@@ -77,31 +78,37 @@ export class Recording {
         this.chainFlag = false;
     }
 
-    pack(loc1, loc2) {
-        const toNumber = (loc) => {
-          const col = loc.charCodeAt(0) - 'a'.charCodeAt(0);
-          const row = parseInt(loc[1]) - 1;
-          return row * 8 + col;
-        };
-      
-        const packedValue = (toNumber(loc1) << 6) | toNumber(loc2);
-        return String.fromCharCode(packedValue);
-      }
-      
-     unpack(char) {
-        const toLocation = (num) => {
-          const col = num % 8;
-          const row = Math.floor(num / 8) + 1;
-          return String.fromCharCode(col + 'a'.charCodeAt(0)) + row;
-        };
-      
-        const packedValue = char.charCodeAt(0);
-        const num1 = packedValue >> 6;
-        const num2 = packedValue & 63;
-      
-        return [toLocation(num1), toLocation(num2)];
-      
+    pack(from, to) {
+        const fromNum = this.locToNum(from);   //first 5 bits set as from (0-63)  
+        const toNum = this.locToNum(to) << 6   // second 5 bits set as to
+        // console.log(fromNum + ' ' + (toNum >> 6))
+        return toNum | fromNum
     }
+
+    locToNum(spot){
+        const file = spot.charCodeAt(0) - 97; // Convert letter to file (0 to 7)
+        const rank = (parseInt(spot[1]) - 1) * 8; // Convert number to rank (0 to 7)
+        return file + rank; // Combine rank and file to get the number (0 to 63)
+    }
+
+    unpack(packedValue) {
+        const fromNum = packedValue & 0b111111; // Extract the lower 5 bits for 'from' position
+        const toNum = packedValue >> 6; // Extract the upper 5 bits for 'to' position
+        //console.log( fromNum + " " + toNum)
+        const from = '' + String.fromCharCode(fromNum % 8 + 97) + (Math.trunc(fromNum / 8) + 1)
+        const to = '' + String.fromCharCode(toNum % 8 + 97) + (Math.trunc(toNum / 8) + 1)
+    
+        return { from, to };
+    }
+
+    stepMove(){
+        this.turnCount++
+        let ret = this.unpack(this.packedArray[this.turnCount])
+        //console.log(ret)
+        return ret
+    }
+   
+    
       
 }
 

@@ -438,10 +438,12 @@ export class Chess {
   _positionCounts = {};
   _SEflag = null;
   _record
-  constructor(whiteElements, blackElements) {
+  constructor(whiteElements, blackElements, record = null, packed = null) {
     this.load(DEFAULT_POSITION);
     this.loadElements(whiteElements, blackElements);
-    this._record = new rec.Recording()
+    if(record) this._record = new rec.Recording(record, packed)
+    else this._record = new rec.Recording()
+    this._packedArray = this._record.packedArray
   }
 
   enPassantSpotConversion(sq){
@@ -454,6 +456,11 @@ export class Chess {
     }
     return '' + rank + String.fromCharCode(file)
   } 
+
+  stepThrough(){
+    this.move(this._record.stepMove())
+  }
+
 
   getMoveHistory(){
     return this._record.recordString
@@ -1201,7 +1208,7 @@ export class Chess {
     let capType;
     if(moveObj.flags & BITS.EP_CAPTURE){
       capType = ele.captureType(this.getElementAt(move.from), this.getElementAt(this.enPassantSpotConversion(move.to)))
-      console.log(this.enPassantSpotConversion(move.to))
+      //console.log(this.enPassantSpotConversion(move.to))
     } else {
       capType = ele.captureType(this.getElementAt(move.from), this.getElementAt(move.to))
     }
