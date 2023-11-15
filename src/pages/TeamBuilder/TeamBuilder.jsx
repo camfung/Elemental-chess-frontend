@@ -104,7 +104,6 @@ const TeamBuilder = () => {
     }, [setPieceElementalTypes]);
 
     const handleGridOfButtonsClick = useCallback((e) => {
-        console.log(e.target.innerHTML);
         const selectedType = e.target.innerHTML;
         console.log(selectedPiece);
         if (!selectedPiece) {

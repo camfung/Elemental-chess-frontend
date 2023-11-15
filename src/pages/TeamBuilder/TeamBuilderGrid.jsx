@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import './TeamBuilderGrid.css'; // Create a CSS file (Grid.css) to style the grid
-import ChessPiece from '../../utils/ChessPiece'
+import ChessPiece from '../../utils/TeamBuilderChessPiece'
 import { ChessPieceTypes, colors } from '../../utils/Enums';
 
 const TeamBuilderGrid = ({ pieceColor, pieceElementalTypes, handleTeamBuilderGridClick, selectedType }) => {
